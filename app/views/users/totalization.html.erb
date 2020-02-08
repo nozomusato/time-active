@@ -1,0 +1,83 @@
+<% provide(:title, @user.name) %>
+<div>
+  <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>【<%= l(@first_day, format: :middle) %>】勤怠管理表</td>
+      <td>指定勤務時間：<%= format_basic_info(@user.work_time) %></td>
+      <td>基本時間：<%= format_basic_info(@user.basic_time) %></td>
+      <td>月初日：<%= l(@first_day, format: :short) %></td>
+    </tr>
+
+    <tr>
+      <td>所属</td>
+      <td>名前：<%= @user.name %></td>
+      <td>出勤日数：<%= @worked_sum %>日</td>
+      <td>月末日：<%= l(@last_day, format: :short) %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="btn-users-show">
+  <%= link_to "⇦ 前月へ", user_path(date: @first_day.prev_month), class: "btn btn-info" %>
+  <%= link_to "次月へ ⇨", user_path(date: @first_day.next_month), class: "btn btn-info" %>
+</div>
+
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>曜日</th>
+        <th></th>
+        <th>開始</th>
+        <th>終了</th>
+        <th>合計時間</th>
+        <th>メモ</th>
+        <th>編集（仮）</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @dates.each do |day| %>
+        <tr>
+          <td><%= l(day.worked_on, format: :short) %></td>
+          <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+          <td>
+            <% if btn_text = active_state(day) %>
+              <%= link_to "#{btn_text}", user_active_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <% end %>
+          </td>
+          <td><%= l(day.started_at, format: :time) if day.started_at.present? %></td>
+          <td><%= l(day.finished_at, format: :time) if day.finished_at.present? %></td>
+          <td>
+            <% if day.started_at.present? && day.finished_at.present? %>
+              <%= working_times(day.started_at, day.finished_at) %>
+            <% end %>
+          </td>
+          <td><%= day.note %></td>
+          <td>
+            <%= link_to '編集', "/edit_action/#{day.id}",remote: true,class: "btn btn-primary"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <!--rowspan:縦結合、colspan：横結合-->
+      <tr>
+        <td colspan="2">累計日数</td>
+        <td colspan="2">総合勤務時間</td>
+        <td colspan="2">累計在社時間</td>
+        <td rowspan="2"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= @dates.count %></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+      </tr>
+    </tfoot>    
+  </table>
+</div>
+
+<!--モーダルウインドウ表示-->
+<div id="edit-action" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

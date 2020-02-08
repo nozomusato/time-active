@@ -1,0 +1,61 @@
+<% provide(:title, @user.name) %>
+<div>
+  <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>名前：<%= @user.name %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>履歴数：<%= @logs.count %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>曜日</th>
+        <th>開始</th>
+        <th>終了</th>
+        <th>合計時間</th>
+        <th>メモ</th>
+        <th>編集</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+      <% @logs.each do |day| %>
+        <tr>
+          <td><%= l(day.worked_on, format: :short) %></td>
+          <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+          <td><%= l(day.started_at, format: :time) if day.started_at.present? %></td>
+          <td><%= l(day.finished_at, format: :time) if day.finished_at.present? %></td>
+          <td>
+            <% if day.started_at.present? && day.finished_at.present? %>
+              <%= working_times(day.started_at, day.finished_at) %>
+            <% end %>
+          </td>
+          <td><%= day.note%></td>
+          <td>
+            <%= link_to '編集', "/edit_action/#{day.id}",remote: true,class: "btn btn-primary"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    
+    <tfoot>
+    </tfoot>
+  </table>
+</div>
+
+<!--モーダルウインドウ表示-->
+<div id="edit-action" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
