@@ -6,6 +6,10 @@ User.create!(name: "Sample User",
              password_confirmation: "password",
              admin: true)
              
+Plan.create!(created_at: "2020-03-01 00:00:00",
+             finished_at: "2020-03-02 00:00:00",
+            user_id: 1)
+             
 User.create!(name: "佐藤望",
              email: "sample1@email.com",
              password: "password",

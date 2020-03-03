@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200106141126) do
+ActiveRecord::Schema.define(version: 20200219034105) do
 
   create_table "actives", force: :cascade do |t|
     t.date "worked_on"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20200106141126) do
     t.index ["user_id"], name: "index_actives_on_user_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string "menu"
+    t.datetime "finished_at"
+    t.string "note"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
   create_table "static_pages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,13 +41,12 @@ ActiveRecord::Schema.define(version: 20200106141126) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin", default: false
-    t.datetime "basic_time", default: "2020-02-08 23:00:00"
-    t.datetime "work_time", default: "2020-02-08 22:30:00"
+    t.datetime "basic_time", default: "2020-02-29 23:00:00"
+    t.datetime "work_time", default: "2020-02-29 22:30:00"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

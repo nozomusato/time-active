@@ -26,7 +26,7 @@ class ActivesController < ApplicationController
     redirect_to @user
   end
   
-  def update_edit_action #work_request 残業申請モーダル表示、登録アクション
+  def update_edit_action
     # 該当の日付の情報を更新
     active = Active.find(params[:active_id])
     permit_status = edit_action_params
@@ -39,7 +39,7 @@ class ActivesController < ApplicationController
       redirect_to logs_user_path(current_user)
     end
   end
-
+  
   def edit_one_month
   end
   
@@ -63,8 +63,8 @@ class ActivesController < ApplicationController
       params.require(:user).permit(actives: [:started_at, :finished_at, :note])[:actives]
     end
     
-    def edit_action_params #残業申請モーダル画面
-      params.permit(actives: [:started_at, :finished_at, :note])[:actives]
+    def edit_action_params
+      params.permit(actives: [:menu,:started_at, :finished_at, :note])[:actives]
     end
     
         # beforeフィルター

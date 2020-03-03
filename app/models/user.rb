@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :actives, dependent: :destroy
-  has_many :menus
+  has_many :plans, dependent: :destroy
   # 「remember_token」という仮想の属性を作成します。
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
@@ -47,6 +47,6 @@ class User < ApplicationRecord
 
   # ユーザーのログイン情報を破棄します。
   def forget
-    update_attribute(:remember_digest, nil)
+    update_attribute(:remember_token, nil)
   end
 end

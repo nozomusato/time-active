@@ -12,11 +12,54 @@ class UsersController < ApplicationController
   def show
   end
   
+  def show_test
+    @user = User.find(params[:id])
+    @plan = Plan.find(params[:id])
+    @plans = @user.plans.where(finished_at: nil)
+    
+    @chart = [
+      ['created_at', "#{@user.plans.where.not(created_at: nil).count}"],
+      ['finished_at', "#{@user.plans.where.not(finished_at: nil).count}"]
+      ]
+    
+    @chart_2 = [
+      ['フリー', "#{@user.plans.where(menu: ['フリー']).count}"],
+      ['運動', "#{@user.plans.where(menu: ['運動']).count}"],
+      ['仕事', "#{@user.plans.where(menu: ['仕事']).count}"],
+      ['食事', "#{@user.plans.where(menu: ['食事']).count}"],
+      ['睡眠', "#{@user.plans.where(menu: ['睡眠']).count}"]
+      ]
+  end
+  
   def logs
-    @logs = Active.where.not(started_at: nil)
+    @plans = @user.plans.order(id: "DESC")
+    @sales = Plan.where(created_at: Date.current.beginning_of_month..Date.current.end_of_month)
+  .group("YEAR(created_at)")
+  .group("MONTH(created_at)")
+  .group("DAY(created_at)")
+  .count()
   end
   
   def totalization
+    @plans = @user.plans.order(id: "DESC")
+    @first = Date.current.beginning_of_month
+    @last = @first.end_of_month
+    @days = (@first..@last)
+  end
+  
+  def csv_dl
+    @user = User.find(params[:id])
+    @plan = Plan.find(params[:id])
+    @lists = @user.plans
+    
+    respond_to do |format|
+      # format.html do
+      #     #html用の処理を書く
+      # end 
+      format.csv do
+          send_data render_to_string, filename: "#{@user.name}logs.csv", type: :csv
+      end
+    end
   end
   
   def edit_action
