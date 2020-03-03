@@ -33,11 +33,6 @@ class UsersController < ApplicationController
   
   def logs
     @plans = @user.plans.order(id: "DESC")
-    @sales = Plan.where(created_at: Date.current.beginning_of_month..Date.current.end_of_month)
-  .group("YEAR(created_at)")
-  .group("MONTH(created_at)")
-  .group("DAY(created_at)")
-  .count()
   end
   
   def totalization
