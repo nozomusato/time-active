@@ -5,7 +5,7 @@ class PlansController < ApplicationController
     end
     
     def create
-      @plan = Plan.new(plans_params)
+      @plan = Plan.new(plan_params)
       @plan.user_id = current_user.id #user_idの情報はフォームからはきていないので、「ログインしている自分のid」を代入
       if @plan.save
         flash[:success] = '開始しました。'
@@ -20,20 +20,44 @@ class PlansController < ApplicationController
       @user = @plan.user #ユーザーレコードからplanのidを取得、代入
     end
     
+    def edit
+      @plan = Plan.find(params[:id])
+      @user = @plan.user
+    end
+    
+    def update_modal
+      @plan = Plan.find(params[:id])
+      if @plan.created_at.present?
+        @plan.update_attributes(plan_params)
+        flash[:info] = "更新しました。"
+      else
+        flash[:danger] = '不正な入力がありました、再入力して下さい。'
+      end
+      redirect_to logs_user_path(current_user)
+    end
+    
     def update
       @plan = Plan.find(params[:id])
       if @plan.created_at.present?
         @plan.update_attributes(finished_at: Time.current)
-        flash[:info] = "終了しました。"
+        flash[:success] = "終了しました。"
       else
         flash[:danger] = '不正な入力がありました、再入力して下さい。'
       end
       redirect_to show_test_user_path(current_user)
     end
     
+    
+    def destroy
+      @plan = Plan.find(params[:id])
+      @plan.destroy
+      flash[:success] = "データを削除しました。"
+      redirect_to logs_user_path(current_user)
+    end
+    
     private
 
-    def plans_params
-      params.require(:plan).permit(:menu,:note)
+    def plan_params
+      params.require(:plan).permit(:menu, :updated_at, :created_at,:finished_at,:note)
     end
 end

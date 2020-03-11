@@ -1,42 +1,65 @@
 <% provide(:title, @user.name) %>
 <div>
   <table class="table table-bordered table-condensed user-table">
+    <tr>
+      <td>名前：<%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>履歴数：<%= @plans.count %></td>
+    </tr>
   </table>
 </div>
 
+<div class="btn-users-show center">
+  <%= link_to "⇦ 前月へ", totalization_user_path(date: @month_first.prev_month), class: "btn btn-info" %>
+  <%= @month_first.strftime("%Y年%m月")%>
+  <%= link_to "次月へ ⇨", totalization_user_path(date: @month_first.next_month), class: "btn btn-info" %>
+</div>
+
+<% if @plans.present? %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
-      <tr>
-        <th>日付</th>
-        <th>曜日</th>
-        <th></th>
-        <th>開始</th>
-        <th>終了</th>
-        <th>合計時間</th>
-        <th>メモ</th>
-        <th>編集（仮）</th>
-      </tr>
+      <%= pie_chart @chart_2 %>
     </thead>
 
     <tbody>
+      <tr>
+        <th>日付</th>
+        <th>メニュー</th>
+        <th>開始時間</th>
+        <th>終了時間</th>
+        <th>合計時間</th>
+        <th>メモ</th>
+        <th>編集</th>
+        <th>削除</th>
+      </tr>
+    </tbody>
+    
+    <tfoot>
       <% @plans.each do |plan|%>
       <tr>
+        <td><%= plan.updated_at.strftime("%Y年%m月%d日")%></td>
         <td><%=plan.menu %></td>
-        <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M:%S")%></td>
-        <td><%= plan.finished_at.strftime("%Y年%m月%d日 %H:%M:%S") if plan.finished_at.present? %></td>
+        <td><%= plan.created_at.strftime("%H:%M")%></td>
+        <td><%= plan.finished_at.strftime("%H:%M") if plan.finished_at.present? %></td>
         <td>
           <% if plan.created_at.present? && plan.finished_at.present? %>
-              <%= (plan.finished_at - plan.created_at) %>
+              <% total = plan.finished_at - plan.created_at%>
+              <%= Time.at(total).strftime('%X')%>
+          <% else plan.created_at.present? && plan.finished_at.nil? %>
+              <% total = Time.current - plan.created_at%>
+              <%= Time.at(total).strftime('%X')%>
           <% end %>
         </td>
         <td><%= plan.note%></td>
+        <td><%= link_to "編集", edit_plan_path(plan), class: "btn btn-success" %></td>
+        <td><%= link_to "削除", plan, method: :delete,
+                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %></td>
       </tr>
       <% end %>
-    </tbody>
-
-    <tfoot>
-      
-    </tfoot>    
+    </tfoot>
+    
   </table>
 </div>
+<% end %>

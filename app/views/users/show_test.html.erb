@@ -1,12 +1,58 @@
-<h1><%= link_to "新規作成", new_plan_path, class: "btn btn-success btn-lg" %></h1>
-<h2><% @plans.each do |plan|%>
-<%=plan.menu %>
-<%= plan.created_at.strftime("%Y年%m月%d日 %H:%M:%S")%>
-<%= plan.finished_at.strftime("%Y年%m月%d日 %H:%M:%S") if plan.finished_at.present? %>
-<%= plan.note%>
-<%= link_to "終了", update_plan_path(plan), method: :patch, class: "btn btn-primary" if plan.finished_at.nil? %>
-<%= link_to "詳細", plan_path(plan.id), class: "btn btn-primary"%>
-<% end %></h2>
+<h1>新規作成</h1>
+<h3 class='center'><%=Date.current.strftime("%Y年")%></h3>
+<h3 class='center'><%=Date.current.strftime("%m月%d日")%></h3>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <%= form_with(model: @plan, url: "/plans", local: true, method: :post) do |f| %>
+    
+    <tbody>
+        <%= f.label :メニュー, class:"label-#{yield(:class_text)}" %>
+        <%= f.select :menu,{"フリー" => "フリー","勉強" => "勉強","運動" => "運動", "仕事" => "仕事", "食事" => "食事", "睡眠" => "睡眠"},{}, class: "form-control" %>
+        <%= f.label :メモ, class:"label-#{yield(:class_text)}" %>
+        <%= f.text_field :note, class: "form-control" %>
+    
+    </tbody>
+    
+    <%= f.submit "作成", class: "btn btn-primary btn-block modal-button-space" %>
+    <% end %>
+  </div>
+</div>
 
-<%= pie_chart @chart %>
-<%= pie_chart @chart_2 %>
+<% if @plans.present?%>
+<div class="container">
+  <div class="row">
+  
+   <div class="col-md-6 col-md-offset-3">
+    <h2>実行中</h2>
+    <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <thead>
+      <tr>
+          <th>日付</th>
+          <th>メニュー</th>
+          <th>開始時間</th>
+          <th>経過時間</th>
+          <th>メモ</th>
+          <th>終了</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        <% @plans.each do |plan|%>
+        <tr>
+            <td><%= plan.updated_at.strftime("%Y年%m月%d日 %H:%M")%></td>
+            <td><%= plan.menu %></td>
+            <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M")%></td>
+            <td><% total = Time.current - plan.created_at%>
+              <%= Time.at(total).strftime('%X')%>
+             </td>
+             <td><%= plan.note%></td>
+             <td><%= link_to "終了", update_plan_path(plan), method: :patch, class: "btn btn-danger" if plan.finished_at.nil? %></td>
+        </tr>
+        <% end %>
+    <tbody>
+    </table>
+    </div>
+<% end %>
+    
+  </div><!--class="row"-->
+  </div><!--class="container"-->

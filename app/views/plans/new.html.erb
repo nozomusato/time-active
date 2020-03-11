@@ -5,13 +5,13 @@
     
     <tbody>
         <%= f.label :メニュー, class:"label-#{yield(:class_text)}" %>
-        <%= f.select :menu,{"フリー" => "フリー","運動" => "運動", "仕事" => "仕事", "食事" => "食事", "睡眠" => "睡眠"},{}, class: "form-control" %>
-        <%= f.label :詳細, class:"label-#{yield(:class_text)}" %>
+        <%= f.select :menu,{"フリー" => "フリー","勉強" => "勉強","運動" => "運動", "仕事" => "仕事", "食事" => "食事", "睡眠" => "睡眠"},{}, class: "form-control" %>
+        <%= f.label :メモ, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :note, class: "form-control" %>
     
     </tbody>
     
-    <%= f.submit "更新", class: "btn btn-primary btn-block modal-button-space" %>
+    <%= f.submit "作成", class: "btn btn-primary btn-block modal-button-space" %>
     <% end %>
   </div>
 </div>

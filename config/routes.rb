@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   
   resources :plans
   patch 'plans/:id', to: 'plans#update', as: :update_plan
+  patch 'modal/:id', to: 'plans#update_modal', as: :update_modal
   
 end

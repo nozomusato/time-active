@@ -5,7 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "ホーム", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "ユーザー画面（テスト）", show_test_user_path(current_user) %></li>
+          <li><%= link_to "アクション作成", show_test_user_path(current_user) %></li>
           <li><%= link_to "全ての履歴", logs_user_path(current_user) %></li>
           <li><%= link_to "集計", totalization_user_path(current_user) %></li>
           <li class="dropdown">

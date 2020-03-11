@@ -72,9 +72,9 @@
         <td rowspan="2"></td>
       </tr>
       <tr>
-        <td colspan="2"><%= @dates.count %></td>
         <td colspan="2"></td>
         <td colspan="2"></td>
+        <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
       </tr>
     </tfoot>    
   </table>

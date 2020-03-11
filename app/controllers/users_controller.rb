@@ -14,16 +14,21 @@ class UsersController < ApplicationController
   
   def show_test
     @user = User.find(params[:id])
-    @plan = Plan.find(params[:id])
-    @plans = @user.plans.where(finished_at: nil)
+    @plan = @user.plans
+    @plans = @user.plans.where(finished_at: nil).order(id: "DESC")
+  end
+  
+  def logs
+    @plans = @user.plans.order(id: "DESC")
     
     @chart = [
       ['created_at', "#{@user.plans.where.not(created_at: nil).count}"],
       ['finished_at', "#{@user.plans.where.not(finished_at: nil).count}"]
       ]
     
-    @chart_2 = [
+     @chart_2 = [
       ['フリー', "#{@user.plans.where(menu: ['フリー']).count}"],
+      ['勉強', "#{@user.plans.where(menu: ['勉強']).count}"],
       ['運動', "#{@user.plans.where(menu: ['運動']).count}"],
       ['仕事', "#{@user.plans.where(menu: ['仕事']).count}"],
       ['食事', "#{@user.plans.where(menu: ['食事']).count}"],
@@ -31,15 +36,21 @@ class UsersController < ApplicationController
       ]
   end
   
-  def logs
-    @plans = @user.plans.order(id: "DESC")
-  end
-  
   def totalization
-    @plans = @user.plans.order(id: "DESC")
-    @first = Date.current.beginning_of_month
-    @last = @first.end_of_month
-    @days = (@first..@last)
+    @user = User.find(params[:id])
+    @month_first = params[:date].nil? ?
+    Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
+    @month_last = @month_first.end_of_month.to_time
+    @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC")
+    
+    @chart_2 = [
+      ['フリー', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['フリー']).count}"],
+      ['勉強', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['勉強']).count}"],
+      ['運動', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['運動']).count}"],
+      ['仕事', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['仕事']).count}"],
+      ['食事', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['食事']).count}"],
+      ['睡眠', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['睡眠']).count}"]
+      ]
   end
   
   def csv_dl
@@ -72,7 +83,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = '新規作成に成功しました。'
-      redirect_to @user
+      redirect_to new_plan_path
     else
       render :new
     end
