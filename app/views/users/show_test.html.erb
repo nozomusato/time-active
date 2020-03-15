@@ -1,4 +1,5 @@
-<h1>新規作成</h1>
+<div class="container">
+  <h1>新規作成</h1>
 <h3 class='center'><%=Date.current.strftime("%Y年")%></h3>
 <h3 class='center'><%=Date.current.strftime("%m月%d日")%></h3>
 <div class="row">
@@ -19,15 +20,13 @@
 </div>
 
 <% if @plans.present?%>
-<div class="container">
   <div class="row">
   
    <div class="col-md-6 col-md-offset-3">
-    <h2>実行中</h2>
+    <h2>実行中...</h2>
     <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
       <tr>
-          <th>日付</th>
           <th>メニュー</th>
           <th>開始時間</th>
           <th>経過時間</th>
@@ -39,12 +38,10 @@
     <tbody>
         <% @plans.each do |plan|%>
         <tr>
-            <td><%= plan.updated_at.strftime("%Y年%m月%d日 %H:%M")%></td>
             <td><%= plan.menu %></td>
             <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M")%></td>
-            <td><% total = Time.current - plan.created_at%>
-              <%= Time.at(total).strftime('%X')%>
-             </td>
+            <% total = Time.current - plan.created_at%>
+              <td><%= Time.at(total).strftime("%H:%M")%></td>
              <td><%= plan.note%></td>
              <td><%= link_to "終了", update_plan_path(plan), method: :patch, class: "btn btn-danger" if plan.finished_at.nil? %></td>
         </tr>

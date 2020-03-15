@@ -6,6 +6,7 @@ class PlansController < ApplicationController
     
     def create
       @plan = Plan.new(plan_params)
+      @plan.created_at = Time.current.change(sec: 0)
       @plan.user_id = current_user.id #user_idの情報はフォームからはきていないので、「ログインしている自分のid」を代入
       if @plan.save
         flash[:success] = '開始しました。'
@@ -39,7 +40,7 @@ class PlansController < ApplicationController
     def update
       @plan = Plan.find(params[:id])
       if @plan.created_at.present?
-        @plan.update_attributes(finished_at: Time.current)
+        @plan.update_attributes(finished_at: Time.current.change(sec: 0))
         flash[:success] = "終了しました。"
       else
         flash[:danger] = '不正な入力がありました、再入力して下さい。'

@@ -4,3 +4,37 @@
   <p></p>
   <%= link_to "ユーザー登録", signup_path, class: "btn btn-lg btn-primary" %>
 </div>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <canvas id="myPieChart"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+  <script>
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      datasets: [{
+          backgroundColor: [
+              "#BB5179",
+              "#FAFF67",
+              "#58A27C",
+              "#3C00FF"
+          ],
+          data: ["1", "1", "1", "1"]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+      }
+    }
+  });
+  </script>
+</body>
+</html>

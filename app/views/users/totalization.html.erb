@@ -20,12 +20,15 @@
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
+      <!--Chart.js表示-->
+      <div class="chart-container" style="position: relative; height:50vh; width:80vw">
+        <canvas id="myChart"></canvas>
+      </div>
       <%= pie_chart @chart_2 %>
     </thead>
 
     <tbody>
       <tr>
-        <th>日付</th>
         <th>メニュー</th>
         <th>開始時間</th>
         <th>終了時間</th>
@@ -39,10 +42,9 @@
     <tfoot>
       <% @plans.each do |plan|%>
       <tr>
-        <td><%= plan.updated_at.strftime("%Y年%m月%d日")%></td>
         <td><%=plan.menu %></td>
-        <td><%= plan.created_at.strftime("%H:%M")%></td>
-        <td><%= plan.finished_at.strftime("%H:%M") if plan.finished_at.present? %></td>
+        <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M")%></td>
+        <td><%= plan.finished_at.strftime("%Y年%m月%d日 %H:%M") if plan.finished_at.present? %></td>
         <td>
           <% if plan.created_at.present? && plan.finished_at.present? %>
               <% total = plan.finished_at - plan.created_at%>
@@ -53,7 +55,7 @@
           <% end %>
         </td>
         <td><%= plan.note%></td>
-        <td><%= link_to "編集", edit_plan_path(plan), class: "btn btn-success" %></td>
+        <td><%= link_to "編集", edit_plan_path(plan), remote: true,class: "btn btn-success" %></td>
         <td><%= link_to "削除", plan, method: :delete,
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %></td>
       </tr>
@@ -63,3 +65,79 @@
   </table>
 </div>
 <% end %>
+
+<!--モーダルウインドウ表示-->
+<div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+<!--Chart.js表示-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script>
+                    var dataLabelPlugin = {
+                        afterDatasetsDraw: function (chart, easing) {
+                            // To only draw at the end of animation, check for easing === 1
+                            var ctx = chart.ctx;
+
+                            chart.data.datasets.forEach(function (dataset, i) {
+                                var dataSum = 0;
+                                dataset.data.forEach(function (element){
+                                    dataSum += element;
+                                });
+
+                                var meta = chart.getDatasetMeta(i);
+                                if (!meta.hidden) {
+                                    meta.data.forEach(function (element, index) {
+                                        // Draw the text in black, with the specified font
+                                        ctx.fillStyle = 'rgb(255, 255, 255)';
+
+                                        var fontSize = 12;
+                                        var fontStyle = 'normal';
+                                        var fontFamily = 'Helvetica Neue';
+                                        ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                                        // Just naively convert to string for now
+                                        var labelString = chart.data.labels[index];
+                                        var dataString = (Math.round(dataset.data[index] / dataSum * 1000)/10).toString() + "%";
+
+                                        // Make sure alignment settings are correct
+                                        ctx.textAlign = 'center';
+                                        ctx.textBaseline = 'middle';
+
+                                        var padding = 5;
+                                        var position = element.tooltipPosition();
+                                        ctx.fillText(labelString, position.x, position.y - (fontSize / 2) - padding);
+                                        ctx.fillText(dataString, position.x, position.y + (fontSize / 2) - padding);
+                                    });
+                                }
+                            });
+                        }
+                    };
+                   
+                    // Chart
+                    var myChart = "myChart";
+                    var chart = new Chart(myChart, {
+                        type: 'pie',
+                        data: {
+                            labels: ["フリー", "勉強", "運動", "仕事", "食事", "睡眠"],
+                            datasets: [{
+                                label: "Sample",
+                                backgroundColor: ["#3F51B5", "#F44336", "#FF9800", "#4CAF50", "#9C27B0", "#00BCD4", "#E91E63"],
+                                data: [<%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['フリー']).count}"%>,
+                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['勉強']).count}"%>,
+                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['運動']).count}"%>,
+                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['仕事']).count}"%>,
+                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['食事']).count}"%>,
+                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['睡眠']).count}"%>],
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "割合"
+                            },
+                            legend:{
+                            },
+                            maintainAspectRatio: false,
+                        },
+                        plugins: [dataLabelPlugin],
+                    });
+</script>

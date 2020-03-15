@@ -19,12 +19,8 @@ class UsersController < ApplicationController
   end
   
   def logs
+    @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
     @plans = @user.plans.order(id: "DESC")
-    
-    @chart = [
-      ['created_at', "#{@user.plans.where.not(created_at: nil).count}"],
-      ['finished_at', "#{@user.plans.where.not(finished_at: nil).count}"]
-      ]
     
      @chart_2 = [
       ['フリー', "#{@user.plans.where(menu: ['フリー']).count}"],
