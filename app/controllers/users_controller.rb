@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:totalization]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:logs_month]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
-  before_action :set_one_month, only: [:show,:logs,:totalization]
+  before_action :set_one_month, only: [:show,:logs,:logs_month]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -21,32 +21,22 @@ class UsersController < ApplicationController
   def logs
     @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
     @plans = @user.plans.order(id: "DESC")
-    
-     @chart_2 = [
-      ['フリー', "#{@user.plans.where(menu: ['フリー']).count}"],
-      ['勉強', "#{@user.plans.where(menu: ['勉強']).count}"],
-      ['運動', "#{@user.plans.where(menu: ['運動']).count}"],
-      ['仕事', "#{@user.plans.where(menu: ['仕事']).count}"],
-      ['食事', "#{@user.plans.where(menu: ['食事']).count}"],
-      ['睡眠', "#{@user.plans.where(menu: ['睡眠']).count}"]
-      ]
   end
   
-  def totalization
+  def logs_month
     @user = User.find(params[:id])
     @month_first = params[:date].nil? ?
     Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
     @month_last = @month_first.end_of_month.to_time
     @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC")
-    
-    @chart_2 = [
-      ['フリー', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['フリー']).count}"],
-      ['勉強', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['勉強']).count}"],
-      ['運動', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['運動']).count}"],
-      ['仕事', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['仕事']).count}"],
-      ['食事', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['食事']).count}"],
-      ['睡眠', "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['睡眠']).count}"]
-      ]
+  end
+  
+  def logs_day
+    @user = User.find(params[:id])
+    @today_first = params[:date].nil? ?
+    Time.current.beginning_of_day : params[:date].to_time
+    @today_last = @today_first.end_of_day.to_time
+    @plans = @user.plans.where(created_at: @today_first..@today_last).order(id: "DESC")
   end
   
   def csv_dl

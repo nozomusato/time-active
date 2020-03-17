@@ -17,7 +17,8 @@ Rails.application.routes.draw do
       patch 'update_basic_info'
       
       get 'logs'
-      get 'totalization'
+      get 'logs_month'
+      get 'logs_day'
       get 'show_test'
       
       get 'actives/edit_one_month'

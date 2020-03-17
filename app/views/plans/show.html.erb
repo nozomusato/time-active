@@ -1,6 +1,0 @@
-<%=@user.name %>
-<%=@plan.menu %>
-<%= @plan.created_at.strftime("%Y年%m月%d日 %H:%M:%S")%>
-<%= @plan.finished_at.strftime("%Y年%m月%d日 %H:%M:%S") if @plan.finished_at.present? %>
-<%= @plan.note%>
-<%= link_to "終了", update_plan_path(@plan), method: :patch, class: "btn btn-primary" if @plan.finished_at.nil? %>

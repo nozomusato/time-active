@@ -27,8 +27,8 @@
         </td>
         <td class="center"></td>
         <% if current_user.admin? %>
-          <td class="center"><%= format_basic_info(user.basic_time) %></td>
-          <td class="center"><%= format_basic_info(user.work_time) %></td>
+          <td class="center"></td>
+          <td class="center"></td>
         <% end %>
         <td class="center">
           <% if current_user.admin? && !current_user?(user) %>

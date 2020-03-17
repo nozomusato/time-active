@@ -16,11 +16,6 @@ class PlansController < ApplicationController
       end
     end
     
-    def show
-      @plan = Plan.find(params[:id])
-      @user = @plan.user #ユーザーレコードからplanのidを取得、代入
-    end
-    
     def edit
       @plan = Plan.find(params[:id])
       @user = @plan.user
