@@ -12,6 +12,10 @@
 <%= link_to "全て", logs_user_path(current_user), class: "btn btn-success" %>
 <%= link_to "月別", logs_month_user_path(current_user), class: "btn btn-success" %>
 <%= link_to "日別", logs_day_user_path(current_user), class: "btn btn-success" %>
+<div class="btn-users-show center">
+  <%= link_to "アクション作成", show_test_user_path(current_user), class: "btn btn-info" %>
+</div>
+<% if @plans.present? %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
@@ -71,6 +75,7 @@
     
   </table>
 </div>
+<% end %>
 
 <!--モーダルウインドウ表示-->
 <div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

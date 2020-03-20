@@ -23,10 +23,10 @@ class PlansController < ApplicationController
     
     def update_modal
       @plan = Plan.find(params[:id])
-      if @plan.update_attributes(time_plan_params)
+      if  @plan.update_attributes(time_plan_params)
         flash[:info] = "更新しました。"
       else
-        flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @plan.errors.full_messages.join("<br>")
+        flash[:danger] = @plan.errors.full_messages.join("<br>")
       end
       redirect_to logs_user_path(current_user)
     end

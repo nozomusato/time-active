@@ -41,7 +41,6 @@ class UsersController < ApplicationController
   
   def csv_dl
     @user = User.find(params[:id])
-    @plan = Plan.find(params[:id])
     @lists = @user.plans
     
     respond_to do |format|
