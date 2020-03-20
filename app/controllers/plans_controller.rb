@@ -23,11 +23,10 @@ class PlansController < ApplicationController
     
     def update_modal
       @plan = Plan.find(params[:id])
-      if @plan.created_at.present?
-        @plan.update_attributes(plan_params)
+      if @plan.update_attributes(time_plan_params)
         flash[:info] = "更新しました。"
       else
-        flash[:danger] = '不正な入力がありました、再入力して下さい。'
+        flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @plan.errors.full_messages.join("<br>")
       end
       redirect_to logs_user_path(current_user)
     end
@@ -54,6 +53,10 @@ class PlansController < ApplicationController
     private
 
     def plan_params
-      params.require(:plan).permit(:menu, :updated_at, :created_at,:finished_at,:note)
+      params.require(:plan).permit(:menu,:note)
+    end
+    
+    def time_plan_params
+      params.require(:plan).permit(:menu,:created_at,:finished_at,:note)
     end
 end
