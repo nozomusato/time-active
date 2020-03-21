@@ -1,9 +1,5 @@
 class PlansController < ApplicationController
     
-    def new
-      @plan = Plan.new
-    end
-    
     def create
       @plan = Plan.new(plan_params)
       @plan.created_at = Time.current.change(sec: 0)
@@ -53,7 +49,7 @@ class PlansController < ApplicationController
     private
 
     def plan_params
-      params.require(:plan).permit(:menu,:note)
+      params.require(:plan).permit(:menu,:note,:address,:latitude,:longitude)
     end
     
     def time_plan_params

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'logs_month'
       get 'logs_day'
       get 'show_test'
+      get 'places'
       
       get 'actives/edit_one_month'
       patch 'actives/update_one_month'

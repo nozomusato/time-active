@@ -18,6 +18,10 @@ class UsersController < ApplicationController
     @plans = @user.plans.where(finished_at: nil).order(id: "DESC")
   end
   
+  def places
+    @plan = Plan.find(params[:id])
+  end
+  
   def logs
     @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
     @plans = @user.plans.order(id: "DESC")

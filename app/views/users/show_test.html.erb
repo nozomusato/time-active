@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>新規作成</h1>
+  <h1>アクション作成</h1>
 <h3 class='center'><%=Date.current.strftime("%Y年")%></h3>
 <h3 class='center'><%=Date.current.strftime("%m月%d日")%></h3>
 <div class="row">
@@ -11,7 +11,12 @@
         <%= f.select :menu,{"フリー" => "フリー","勉強" => "勉強","運動" => "運動", "仕事" => "仕事", "食事" => "食事", "睡眠" => "睡眠"},{}, class: "form-control" %>
         <%= f.label :メモ, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :note, class: "form-control" %>
-    
+        <%= f.label :住所, class:"label-#{yield(:class_text)}" %>
+        <%= f.text_field :address, class: "form-control" %>
+        <%= f.label :経度, class:"label-#{yield(:class_text)}" %>
+        <%= f.text_field :latitude, class: "form-control" %>
+        <%= f.label :緯度, class:"label-#{yield(:class_text)}" %>
+        <%= f.text_field :longitude, class: "form-control" %>
     </tbody>
     
     <%= f.submit "作成", class: "btn btn-primary btn-block modal-button-space" %>
