@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = '新規作成に成功しました。'
-      redirect_to new_plan_path
+      redirect_to show_test_user_path(@user)
     else
       render :new
     end

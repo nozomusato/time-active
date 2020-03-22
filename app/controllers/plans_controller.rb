@@ -49,7 +49,7 @@ class PlansController < ApplicationController
     private
 
     def plan_params
-      params.require(:plan).permit(:menu,:note,:address,:latitude,:longitude)
+      params.require(:plan).permit(:menu,:note,:latitude,:longitude)
     end
     
     def time_plan_params
