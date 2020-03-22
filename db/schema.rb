@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20200219034105) do
     t.string "menu"
     t.datetime "finished_at"
     t.string "note"
-    t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.integer "user_id"
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 20200219034105) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin", default: false
-    t.datetime "basic_time", default: "2020-03-21 23:00:00"
-    t.datetime "work_time", default: "2020-03-21 22:30:00"
+    t.datetime "basic_time", default: "2020-03-22 23:00:00"
+    t.datetime "work_time", default: "2020-03-22 22:30:00"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

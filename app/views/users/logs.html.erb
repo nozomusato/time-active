@@ -34,9 +34,7 @@
         <th>終了時間</th>
         <th>合計時間</th>
         <th>メモ</th>
-        <th>住所</th>
-        <th>経度</th>
-        <th>緯度</th>
+        <th>場所</th>
         <th>編集</th>
         <th>削除</th>
       </tr>
@@ -58,10 +56,7 @@
           <% end %>
         </td>
         <td><%= plan.note%></td>
-        <td><%= plan.address%></td>
-        <td><%= plan.latitude%></td>
-        <td><%= plan.longitude%></td>
-        <td><%= link_to "地図", places_user_path(plan),class: "btn btn-success" %></td>
+        <td><%= link_to "地図", places_user_path(plan),target: :_blank,class: "btn btn-info" if plan.latitude.present? %></td>
         <td><%= link_to "編集", edit_plan_path(plan), remote: true,class: "btn btn-success" %></td>
         <td><%= link_to "削除", plan, method: :delete,
                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %></td>

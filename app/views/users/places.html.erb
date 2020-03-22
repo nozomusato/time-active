@@ -1,4 +1,16 @@
-地図
-住所：<%= @plan.address%>
-経度：<%= @plan.latitude%>
-緯度：<%= @plan.longitude%>
+<h2>登録地点</h2>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIff7wNQW9YbfbdF1mff_msv4CNNF_oRc&callback=initMap"></script>
+<script>
+  function initMap() {
+    var mapPosition = new google.maps.LatLng( <%= @plan.latitude%>,<%= @plan.longitude%> );//緯度経度
+    var map = new google.maps.Map(document.getElementById('gmap'), {
+    zoom: 17,//ズーム
+    center: mapPosition
+  });
+    var marker = new google.maps.Marker({
+    position: mapPosition,
+    map: map
+    });
+  }
+</script>
+<div id="gmap"></div>
