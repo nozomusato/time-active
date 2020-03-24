@@ -4,6 +4,7 @@
 <h3 class='center'><%=Date.current.strftime("%m月%d日")%></h3>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <p><button onclick="getMyPlace()">現在地情報を登録</button></p>
       <%= form_with(model: @plan, url: "/plans", local: true, method: :post) do |f| %>
     
     <tbody>
@@ -46,7 +47,10 @@
             <% total = Time.current - plan.created_at%>
               <td><%= Time.at(total).strftime("%H:%M")%></td>
              <td><%= plan.note%></td>
-             <td><%= link_to "終了", update_plan_path(plan), method: :patch, class: "btn btn-danger" if plan.finished_at.nil? %></td>
+             <td><%= link_to(plan, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
+             <i class="fa fa-trash-o fa-2x btn button_delete"></i>
+             <% end %>
+             </td>
         </tr>
         <% end %>
     <tbody>
@@ -60,7 +64,6 @@
   <!--map1-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIff7wNQW9YbfbdF1mff_msv4CNNF_oRc"></script>
 
-<p><button onclick="getMyPlace()">現在地情報を登録</button></p>
 <div id="result"></div>
 <!--<div id="map" style="width:100%;height:300px;"></div>-->
 

@@ -27,53 +27,7 @@
     
     <%= link_to "CSV出力", csv_dl_path(format: :csv), class: "btn btn-primary", method: :post %>
     
-    <tbody>
-      <tr>
-        <th>メニュー</th>
-        <th>開始時間</th>
-        <th>終了時間</th>
-        <th>合計時間</th>
-        <th>メモ</th>
-        <th>場所</th>
-        <th>編集</th>
-        <th>削除</th>
-      </tr>
-    </tbody>
-    
-    <tfoot>
-      <% @plans.each do |plan|%>
-      <tr>
-        <td><%=plan.menu %></td>
-        <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M")%></td>
-        <td><%= plan.finished_at.strftime("%Y年%m月%d日 %H:%M") if plan.finished_at.present? %></td>
-        <td>
-          <% if plan.created_at.present? && plan.finished_at.present? %>
-          <%= working_times(plan.created_at, plan.finished_at) %>
-          <% seconds = (plan.finished_at - plan.created_at).to_i %>
-          <% @total_seconds = @total_seconds.to_i + seconds %>
-          <% else plan.created_at.present? && plan.finished_at.nil? %>
-          <%= working_times(plan.created_at, Time.current) %>
-          <% end %>
-        </td>
-        <td><%= plan.note%></td>
-        <td><%= link_to "地図", places_user_path(plan),target: :_blank,class: "btn btn-info" if plan.latitude.present? %></td>
-        <td><%= link_to "編集", edit_plan_path(plan), remote: true,class: "btn btn-success" %></td>
-        <td><%= link_to "削除", plan, method: :delete,
-                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %></td>
-      </tr>
-      <% end %>
-      
-      <tr>
-        <td><%=@plans.count%></td>
-        <td></td>
-        <td></td>
-        <td><%= working_times_sum(@total_seconds) unless @total_seconds.nil? %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tfoot>
+    <%= render 'logs_index' %>
     
   </table>
 </div>

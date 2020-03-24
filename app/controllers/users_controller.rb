@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   
   def logs
     @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
-    @plans = @user.plans.order(id: "DESC")
+    @plans = @user.plans.order(created_at: "DESC")
   end
   
   def logs_month
