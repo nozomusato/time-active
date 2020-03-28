@@ -12,17 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20200219034105) do
 
-  create_table "actives", force: :cascade do |t|
-    t.date "worked_on"
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.string "note"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_actives_on_user_id"
-  end
-
   create_table "plans", force: :cascade do |t|
     t.string "menu"
     t.datetime "finished_at"
@@ -47,8 +36,8 @@ ActiveRecord::Schema.define(version: 20200219034105) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin", default: false
-    t.datetime "basic_time", default: "2020-03-22 23:00:00"
-    t.datetime "work_time", default: "2020-03-22 22:30:00"
+    t.datetime "basic_time", default: "2020-03-27 23:00:00"
+    t.datetime "work_time", default: "2020-03-27 22:30:00"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

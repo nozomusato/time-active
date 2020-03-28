@@ -13,7 +13,7 @@
 <%= link_to "月別", logs_month_user_path(current_user), class: "btn btn-success" %>
 <%= link_to "日別", logs_day_user_path(current_user), class: "btn btn-success" %>
 <div class="btn-users-show center">
-  <%= link_to "アクション作成", show_test_user_path(current_user), class: "btn btn-info" %>
+  <%= link_to "アクション作成", start_user_path(current_user), class: "start" %>
 </div>
 <% if @plans.present? %>
 <div>
@@ -25,7 +25,7 @@
       </div>
     </thead>
     
-    <%= link_to "CSV出力", csv_dl_path(format: :csv), class: "btn btn-primary", method: :post %>
+    <%= link_to " CSV出力", csv_dl_path(format: :csv), class: "btn btn-primary fa fa-arrow-circle-o-down fa-lg", method: :post %>
     
     <%= render 'logs_index' %>
     

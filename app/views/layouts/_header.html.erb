@@ -1,19 +1,18 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top navbar-default navbar-light" style="background-color: #FF773E;">
   <div class="container">
     <%= link_to "Time-Active", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "ホーム", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "アクション作成", show_test_user_path(current_user) %></li>
+          <li><%= link_to current_user.name, user_path(current_user) %></li>
+          <li><%= link_to "アクション作成", start_user_path(current_user) %></li>
           <li><%= link_to "履歴", logs_user_path(current_user) %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               メニュー <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "ユーザーindex", users_path %></li>
-              <li><%= link_to "ユーザーedit", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "ログアウト", logout_path, method: :delete %>

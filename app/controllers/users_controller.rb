@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
-  before_action :set_one_month, only: [:show,:logs,:logs_month]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -12,7 +11,7 @@ class UsersController < ApplicationController
   def show
   end
   
-  def show_test
+  def start
     @user = User.find(params[:id])
     @plan = @user.plans
     @plans = @user.plans.where(finished_at: nil).order(id: "DESC")

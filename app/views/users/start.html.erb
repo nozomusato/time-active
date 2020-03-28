@@ -13,12 +13,12 @@
         <%= f.label :メモ, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :note, class: "form-control" %>
         <%= f.label :緯度, class:"label-#{yield(:class_text)}" %>
-        <%= f.text_field :latitude, id: "result1", class: "form-control" %>
+        <%= f.text_field :latitude,readonly: true, id: "result1", class: "form-control" %>
         <%= f.label :経度, class:"label-#{yield(:class_text)}" %>
-        <%= f.text_field :longitude, id: "result2",class: "form-control" %>
+        <%= f.text_field :longitude,readonly: true, id: "result2",class: "form-control" %>
     </tbody>
     
-    <%= f.submit "作成", class: "btn btn-primary btn-block modal-button-space" %>
+    <%= f.submit "アクション作成", class: "start" %>
     <% end %>
   </div>
 </div>
@@ -47,10 +47,12 @@
             <% total = Time.current - plan.created_at%>
               <td><%= Time.at(total).strftime("%H:%M")%></td>
              <td><%= plan.note%></td>
-             <td><%= link_to(plan, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
-             <i class="fa fa-trash-o fa-2x btn button_delete"></i>
-             <% end %>
-             </td>
+             <td><% unless plan.finished_at.present? %>
+                  <%= link_to(update_plan_path(plan), method: :patch) do %>
+                   <i class="fa fa-stop-circle fa-2x button_stop"></i>
+                  <% end %>
+                 <% end %>
+              </td>
         </tr>
         <% end %>
     <tbody>

@@ -1,3 +1,33 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.logo-top {                    /* ロゴ部分の指定 */
+    text-align:  center;        /* 文字を中央揃え */
+    font-size: 50px;
+    padding: 10px;                /* 余白指定 */
+    color:  #fff;                /* 文字の色指定 */
+    margin:  0 auto;            /* 中央寄せ */
+    animation: fadeIn 10s ease 0s 1 normal;
+    -webkit-animation: fadeIn 13s ease 0s 1 normal;
+    font-family: 'Savoye LET',sans-serif;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+
+}
+ 
+.background-top {                /* 背景部分の指定 */
+    padding: 180px;  
+    background: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%),url(time-active-背景.jpg);/* 余白指定 */
+    background-repeat: no-repeat; /* 繰り返し無し */
+    background-size: cover; /* 全体表示 */
+    animation: fadeIn 2s ease 0s 1 normal;
+    -webkit-animation: fadeIn 3s ease 0s 1 normal;
+}

@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_many :actives, dependent: :destroy
   has_many :plans, dependent: :destroy
   # 「remember_token」という仮想の属性を作成します。
   attr_accessor :remember_token
