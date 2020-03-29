@@ -17,8 +17,9 @@
         <%= f.label :経度, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :longitude,readonly: true, id: "result2",class: "form-control" %>
     </tbody>
-    
+    <div class = "center">
     <%= f.submit "アクション作成", class: "btn start" %>
+    </div>
     <% end %>
   </div>
 </div>

@@ -9,9 +9,22 @@
     </tr>
   </table>
 </div>
-<%= link_to "全て", logs_user_path(current_user), class: "btn btn-success" %>
-<%= link_to "月別", logs_month_user_path(current_user), class: "btn btn-success" %>
-<%= link_to "日別", logs_day_user_path(current_user), class: "btn btn-success" %>
+<div class="center">
+  <div class="row">
+    <div class="col-sm-1">
+      <%= link_to "全て", logs_user_path(current_user), class: "btn day" %>
+    </div>
+    <div class="col-sm-1">
+      <%= link_to "月別", logs_month_user_path(current_user), class: "btn day" %>
+    </div>
+    <div class="col-sm-1">
+      <%= link_to "日別", logs_day_user_path(current_user), class: "btn day" %>
+    </div>
+    <div>
+      <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
+    </div>
+  </div>
+</div>
 <div class="btn-users-show center">
   <%= link_to "⇦ 先月", logs_month_user_path(date: @month_first.prev_month), class: "btn btn-info" %>
   <%= @month_first.strftime("%Y年%m月")%>
@@ -88,7 +101,7 @@
                             labels: ["フリー", "勉強", "運動", "仕事", "食事", "睡眠"],
                             datasets: [{
                                 label: "Sample",
-                                backgroundColor: ["#3F51B5", "#F44336", "#FF9800", "#4CAF50", "#9C27B0", "#00BCD4", "#E91E63"],
+                                backgroundColor: ["#5D99FF", "#FA8072", "#FFD700", "#9ACD32", "#9370DB", "#F4A460"],
                                 data: [<%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['フリー']).count}"%>,
                                 <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['勉強']).count}"%>,
                                 <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['運動']).count}"%>,

@@ -10,21 +10,22 @@
   </table>
 </div>
 
-<div class="container">
+<div class="center">
   <div class="row">
     <div class="col-sm-1">
-      <%= link_to "全て", logs_user_path(current_user), class: "btn all" %>
+      <%= link_to "全て", logs_user_path(current_user), class: "btn day" %>
     </div>
     <div class="col-sm-1">
-      <%= link_to "月別", logs_month_user_path(current_user), class: "btn all" %>
+      <%= link_to "月別", logs_month_user_path(current_user), class: "btn day" %>
     </div>
     <div class="col-sm-1">
-      <%= link_to "日別", logs_day_user_path(current_user), class: "btn all" %>
-    </div>
-    <div>
-      <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
+      <%= link_to "日別", logs_day_user_path(current_user), class: "btn day" %>
     </div>
   </div>
+  <div class = "center">
+      <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
+  </div>
+</div>
   
 <% if @plans.present? %>
 <div>
@@ -97,7 +98,7 @@
                             labels: ["フリー", "勉強", "運動", "仕事", "食事", "睡眠"],
                             datasets: [{
                                 label: "Sample",
-                                backgroundColor: ["#3F51B5", "#F44336", "#FF9800", "#4CAF50", "#9C27B0", "#00BCD4", "#E91E63"],
+                                backgroundColor: ["#5D99FF", "#FA8072", "#FFD700", "#9ACD32", "#9370DB", "#F4A460"],
                                 data: [<%= "#{@user.plans.where(menu: ['フリー']).count}"%>,
                                 <%= "#{@user.plans.where(menu: ['勉強']).count}"%>,
                                 <%= "#{@user.plans.where(menu: ['運動']).count}"%>,

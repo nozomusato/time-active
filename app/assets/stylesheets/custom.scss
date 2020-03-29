@@ -120,7 +120,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
-  color: #FF0000;
+  color: #FA8072;
   background-color: #FFF;
   border: none;
   border-radius: 45px;
@@ -131,8 +131,7 @@ p {
   }
 
 .button_stop:hover {
-  background-color: #FF0000;
-  box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
+  background-color: #FA8072;
   color: #FFF;
   transform: translateY(-7px);
 }
@@ -158,7 +157,6 @@ p {
 
 .button_map:hover {
   background-color: #5D99FF;
-  box-shadow: 0px 15px 20px rgba(0, 255, 150, 0.4);
   color: #FFF;
   transform: translateY(-7px);
 }
@@ -172,7 +170,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
-  color: #00FF00;
+  color: #9ACD32;
   background-color: #FFF;
   border: none;
   border-radius: 45px;
@@ -183,8 +181,7 @@ p {
   }
 
 .button_edit:hover {
-  background-color: #00FF00;
-  box-shadow: 0px 15px 20px rgba(0, 255, 255, 0.4);
+  background-color: #9ACD32;
   color: #FFF;
   transform: translateY(-7px);
 }
@@ -198,7 +195,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
-  color: #FF69A3;
+  color: #FA8072;
   background-color: #FFF;
   border: none;
   border-radius: 45px;
@@ -209,8 +206,7 @@ p {
   }
 
 .button_delete:hover {
-  background-color: #FF69A3;
-  box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
+  background-color: #FA8072;
   color: #FFF;
   transform: translateY(-7px);
 }
@@ -367,82 +363,54 @@ p {
 
 /* アクション作成ボタン */
 .start{
-    color: rgba(30, 22, 54, 0.6);
-    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset; /* ボーダーライン */
-    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-    display: block; /* レイアウトロック */
-    margin: 20px auto;
-    max-width: 180px;
-    padding: 20px 30px; /* 余白幅 */
-    letter-spacing: 2.5px; /* 文字幅 */
+  margin-top: 20px;
+  padding-bottom: 50px;
+  display: inline-block;
+  width: 180px;
+  height:50px;
+  text-align: center;
+  background-color: #FFF;
+  font-size: 16px;
+  line-height: 52px;
+  color: #777777;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #777777;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .start:hover {
-  background-color:#FF773E;
-  box-shadow: 0px 15px 20px #FF773E;
-  color: #FFF;
-  transform: translateY(-7px);
-}
-
-.all{
-  color: rgba(30, 22, 54, 0.6);
-  background-color:#0F0;
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  display: block;
-  padding: 2px 3px;
-  letter-spacing: 2.5px;
-}
-.all:hover{
-  background-color:#0F0;
-  box-shadow: 0px 15px 20px #0F0;
-  color: #FFF;
-  transform: translateY(-7px);
-}
-
-.month{
-  color: rgba(30, 22, 54, 0.6);
-  background-color:#0F0;
-  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  display: block;
-  padding: 2px 3px;
-  letter-spacing: 2.5px;
-}
-.month:hover{
-  background-color:#0F0;
-  box-shadow: 0px 15px 20px #0F0;
-  color: #FFF;
+  background-color:#FFF;
+  color: #F4A460;
+  border: 2px solid #F4A460;
   transform: translateY(-7px);
 }
 
 .day{
-  color: rgba(30, 22, 54, 0.6);
-  background-color:#0F0;
-  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  color: #FFF;
+  background-color:#F4A460;
   transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   display: block;
   padding: 2px 3px;
   letter-spacing: 2.5px;
 }
 .day:hover{
-  background-color:#0F0;
-  box-shadow: 0px 15px 20px #0F0;
   color: #FFF;
   transform: translateY(-7px);
 }
 
 .csv{
-  color: #000;
-  background-color: #00BFFF;
-  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  color: #FFF;
+  background-color: #F4A460;
   transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   display: block;
   padding: 10px 15px;
   letter-spacing: 2.5px;
 }
 .csv:hover{
-  background-color:#00BFFF;
-  box-shadow: 0px 15px 20px #00BFFF;
+  background-color:#F4A460;
   color: #FFF;
   transform: translateY(-7px);
 }
@@ -458,10 +426,10 @@ p {
   background-color: Transparent;
   font-size: 16px;
   line-height: 52px;
-  color: #32EEFF;
+  color: #5D99FF;
   text-decoration: none;
   font-weight: bold;
-  border: 2px solid #32EEFF;
+  border: 2px solid #5D99FF;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -480,8 +448,8 @@ p {
   z-index: -1;
 }
 .btn-open:hover{
-  color: #17F9AD;
-  border: 2px solid #17F9AD;
+  color: #F4A460;
+  border: 2px solid #F4A460;
 }
 .btn-open:hover:after{
   height: 240%;
@@ -502,18 +470,17 @@ p {
   background-color: Transparent;
   font-size: 16px;
   line-height: 52px;
-  color: #32EEFF;
+  color: #5D99FF;
   text-decoration: none;
   font-weight: bold;
-  border: 2px solid #32EEFF;
+  border: 2px solid #5D99FF;
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 .login:hover{
   background-color:#FFF;
-  box-shadow: 0px 15px 20px rgba(0, 255, 0, 0.4);
-  color: #17F9AD;
-  border: 2px solid #17F9AD;
+  color: #F4A460;
+  border: 2px solid #F4A460;
   transform: translateY(-7px);
 }
