@@ -113,7 +113,7 @@ p {
 /* 終了ボタン */
 .button_stop {
   padding-top: 5px;
-  padding-left: 4px;
+  padding-left: 5px;
   width: 40px;
   height: 40px;
   font-family: 'Roboto', sans-serif;
@@ -121,17 +121,19 @@ p {
   letter-spacing: 2.5px;
   font-weight: 500;
   color: #FF0000;
-  background-color: none;
+  background-color: #FFF;
   border: none;
   border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
   }
 
 .button_stop:hover {
-  background-color: none;
-  color: #FF0000;
+  background-color: #FF0000;
+  box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
+  color: #FFF;
   transform: translateY(-7px);
 }
 
@@ -214,57 +216,143 @@ p {
 }
 
 .home{
-  color: #FA8072;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #FF69A3;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 
 .home:hover{
+  background-color: #FF69A3;
+  box-shadow: 0px 15px 20px rgba(255, 0, 0, 0.4);
   color: #FFF;
-  background-color: #FA8072;
   transform: translateY(-10px);
 }
 
 .user-edit{
+  padding-right: 10px;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
   color: #00BFFF;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .user-edit:hover{
   color: #FFF;
   background-color: #00BFFF;
+  box-shadow: 0px 15px 20px rgba(0, 255, 255, 0.4);
   transform: translateY(-10px);
 }
 
 .user-index{
+  padding-top: 15px;
+  padding-left: 13px;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
   color: #7CFC00;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .user-index:hover{
   color: #FFF;
   background-color: #7CFC00;
+  box-shadow: 0px 15px 20px rgba(0, 255, 0, 0.4);
   transform: translateY(-10px);
 }
 
 .user-start{
+  padding-left: 13px;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
   color: #9400D3;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .user-start:hover{
   color: #FFF;
   background-color: #9400D3;
+  box-shadow: 0px 15px 20px rgba(255, 0, 255, 0.4);
   transform: translateY(-10px);
 }
 
 .user-logs{
+  padding-top: 8px;
+  padding-left: 10px;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
   color: #FFD700;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .user-logs:hover{
   color: #FFF;
   background-color: #FFD700;
+  box-shadow: 0px 15px 20px rgba(255, 255, 0, 0.4);
   transform: translateY(-10px);
 }
 
 .logout{
+  padding-right: 7px;
+  width: 85px;
+  height: 85px;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
   color: #696969;
+  background-color: #FFF;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .logout:hover{
   color: #FFF;
   background-color: #696969;
+  box-shadow: 0px 15px 20px rgba(128, 128, 128, 0.4);
   transform: translateY(-10px);
 }
 
@@ -280,21 +368,152 @@ p {
 /* アクション作成ボタン */
 .start{
     color: rgba(30, 22, 54, 0.6);
-    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
-    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset; /* ボーダーライン */
     transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-    display: block;
+    display: block; /* レイアウトロック */
     margin: 20px auto;
     max-width: 180px;
-    text-decoration: none;
-    border-radius: 4px;
-    padding: 20px 30px;
+    padding: 20px 30px; /* 余白幅 */
+    letter-spacing: 2.5px; /* 文字幅 */
 }
 
 .start:hover {
-    color: #000;
-    box-shadow: #FF8856 0 80px 0px 2px inset;
+  background-color:#FF773E;
+  box-shadow: 0px 15px 20px #FF773E;
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.all{
+  color: rgba(30, 22, 54, 0.6);
+  background-color:#0F0;
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  display: block;
+  padding: 2px 3px;
+  letter-spacing: 2.5px;
+}
+.all:hover{
+  background-color:#0F0;
+  box-shadow: 0px 15px 20px #0F0;
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.month{
+  color: rgba(30, 22, 54, 0.6);
+  background-color:#0F0;
+  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  display: block;
+  padding: 2px 3px;
+  letter-spacing: 2.5px;
+}
+.month:hover{
+  background-color:#0F0;
+  box-shadow: 0px 15px 20px #0F0;
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.day{
+  color: rgba(30, 22, 54, 0.6);
+  background-color:#0F0;
+  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  display: block;
+  padding: 2px 3px;
+  letter-spacing: 2.5px;
+}
+.day:hover{
+  background-color:#0F0;
+  box-shadow: 0px 15px 20px #0F0;
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.csv{
+  color: #000;
+  background-color: #00BFFF;
+  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  display: block;
+  padding: 10px 15px;
+  letter-spacing: 2.5px;
+}
+.csv:hover{
+  background-color:#00BFFF;
+  box-shadow: 0px 15px 20px #00BFFF;
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.btn-open {
+   animation: fadeIn 9s ease 0s 1 normal;
+    -webkit-animation: fadeIn 12s ease 0s 1 normal;
+  padding-bottom: 50px;
+  display: inline-block;
+  width: 180px;
+  height:50px;
+  text-align: center;
+  background-color: Transparent;
+  font-size: 16px;
+  line-height: 52px;
+  color: #32EEFF;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #32EEFF;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn-open:after{
+  width: 100%;
+  height: 0;
+  content:"";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background : #FFF;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transition: .2s;
+  z-index: -1;
+}
+.btn-open:hover{
+  color: #17F9AD;
+  border: 2px solid #17F9AD;
+}
+.btn-open:hover:after{
+  height: 240%;
+  opacity: 1;
+}
+.btn-open:active:after{
+  height: 340%;
+  opacity: 1;
+}
+
+.login{
+  margin-top: 20px;
+  padding-bottom: 50px;
+  display: inline-block;
+  width: 180px;
+  height:50px;
+  text-align: center;
+  background-color: Transparent;
+  font-size: 16px;
+  line-height: 52px;
+  color: #32EEFF;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #32EEFF;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.login:hover{
+  background-color:#FFF;
+  box-shadow: 0px 15px 20px rgba(0, 255, 0, 0.4);
+  color: #17F9AD;
+  border: 2px solid #17F9AD;
+  transform: translateY(-7px);
 }

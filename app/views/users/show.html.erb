@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <div class="container center">
   <div class="row">
-    <div class="col-6 col-sm-4">
+    <div class="col-md-6">
       <%= link_to (root_path) do %>
-        <i class="fa fa-home fa-5x fa-border home"></i>
+        <i class="fa fa-home fa-5x btn home"></i>
         <p>ホーム</p>
         <% end %>
     </div>
     
-    <div class="col-6 col-sm-4">
+    <div class="col-md-6">
       <%= link_to (edit_user_path(current_user)) do %>
-        <i class="fa fa-child fa-5x fa-border user-edit"></i>
+        <i class="fa fa-child fa-5x btn user-edit"></i>
         <p>プロフィール編集</p>
         <% end %>
     </div>
-    <div class="col-6 col-sm-4">
+    </div>
+    
+    <div class="row">
+    <div class="col-md-6">
       <%= link_to (users_path) do %>
-        <i class="fa fa-users fa-5x fa-border user-index"></i>
+        <i class="fa fa-users fa-4x btn user-index"></i>
         <p>ユーザー一覧</p>
         <% end %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-6 col-sm-4">
+  
+    <div class="col-md-6">
        <%= link_to (start_user_path(current_user)) do %>
-        <i class="fa fa-clock-o fa-5x fa-border user-start"></i>
+        <i class="fa fa-clock-o fa-5x btn user-start"></i>
         <p>アクション開始</p>
         <% end %>
     </div>
-    <div class="col-6 col-sm-4">
+    </div>
+    
+    <div class="row">
+    <div class="col-md-6">
       <%= link_to (logs_user_path(current_user)) do %>
-        <i class="fa fa-pie-chart fa-5x fa-border user-logs"></i>
+        <i class="fa fa-pie-chart fa-5x btn user-logs"></i>
         <p>集計</p>
         <% end %>
     </div>
-    <div class="col-6 col-sm-4">
+    <div class="col-md-6">
       <%= link_to logout_path, method: :delete do %>
-        <i class="fa fa-power-off fa-5x fa-border logout"></i>
+        <i class="fa fa-power-off fa-5x btn logout"></i>
         <p>ログアウト</p>
         <% end %>
     </div>
-  </div>
+    </div>
+    
 </div>

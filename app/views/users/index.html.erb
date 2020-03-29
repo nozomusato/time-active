@@ -9,10 +9,7 @@
         <th><%= User.human_attribute_name :name %></th>
         <th class="center"></th>
         <% if current_user.admin? %>
-          <th class="center"><%= User.human_attribute_name :basic_time %></th>
-          <th class="center"><%= User.human_attribute_name :work_time %></th>
         <% end %>
-        <th></th>
       </tr>
     </thead>
 
@@ -25,18 +22,24 @@
             <%= user.name %>
           <% end %>
         </td>
+        
         <td class="center"></td>
         <% if current_user.admin? %>
-          <td class="center"></td>
-          <td class="center"></td>
         <% end %>
+        
         <td class="center">
-          <% if current_user.admin? && !current_user?(user) %>
-            <%= link_to "基本情報編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-success" %>
-            <%= link_to "削除", user, method: :delete,
-                data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+        <% if current_user.admin? && !current_user?(user) %>
+          
+          <%= link_to(edit_basic_info_user_path(user),remote: true) do %>
+           <i class="fa fa-pencil fa-2x btn button_edit"></i>
           <% end %>
+          <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
+           <i class="fa fa-trash-o fa-2x btn button_delete"></i>
+          <% end %>
+          
+        <% end %>
         </td>
+        
       </tr>
     <% end %>
   </table>

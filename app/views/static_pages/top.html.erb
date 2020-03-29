@@ -1,10 +1,66 @@
-<% provide(:title, "Top") %>
+<% unless logged_in? %>
+<% provide(:title, "トップ") %>
 </div>
 <div class="background-top">
     <div class="logo-top">
       <h1>Time-Active</h1>
     </div>
-    <div>
-    <%= link_to "ユーザー登録", signup_path, class: "start" %>
+    <div class = "center">
+    <%= link_to "ユーザー登録", signup_path, class: "btn btn-open" %>
+    </div>
 </div>
+<% end %>
+
+<% if logged_in? %>
+<% provide(:title, "メニュー") %>
+<!DOCTYPE html>
+<div class="container center">
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to (root_path) do %>
+        <i class="fa fa-home fa-5x btn home"></i>
+        <p>ホーム</p>
+        <% end %>
+    </div>
+    
+    <div class="col-md-6">
+      <%= link_to (edit_user_path(current_user)) do %>
+        <i class="fa fa-child fa-5x btn user-edit"></i>
+        <p>プロフィール編集</p>
+        <% end %>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-md-6">
+      <%= link_to (users_path) do %>
+        <i class="fa fa-users fa-4x btn user-index"></i>
+        <p>ユーザー一覧</p>
+        <% end %>
+    </div>
+  
+    <div class="col-md-6">
+       <%= link_to (start_user_path(current_user)) do %>
+        <i class="fa fa-clock-o fa-5x btn user-start"></i>
+        <p>アクション開始</p>
+        <% end %>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-md-6">
+      <%= link_to (logs_user_path(current_user)) do %>
+        <i class="fa fa-pie-chart fa-5x btn user-logs"></i>
+        <p>集計</p>
+        <% end %>
+    </div>
+    <div class="col-md-6">
+      <%= link_to logout_path, method: :delete do %>
+        <i class="fa fa-power-off fa-5x btn logout"></i>
+        <p>ログアウト</p>
+        <% end %>
+    </div>
+    </div>
+    
 </div>
+<% end %>
