@@ -9,18 +9,8 @@
         <% if logged_in? %>
           <li><%= link_to current_user.name, user_path(current_user) %></li>
           <li><%= link_to "アクション作成", start_user_path(current_user) %></li>
-          <li><%= link_to "履歴", logs_user_path(current_user) %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              メニュー <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="divider"></li>
-              <li>
-                <%= link_to "ログアウト", logout_path, method: :delete %>
-              </li>
-            </ul>
-          </li>
+          <li><%= link_to "集計", logs_user_path(current_user) %></li>
+          <li><%= link_to "ユーザー一覧", users_path(current_user) %></li>
         <% else %>
           <li><%= link_to "ログイン", login_path %></li>
         <% end %>

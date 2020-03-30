@@ -5,9 +5,11 @@
         <th>終了時間</th>
         <th>合計時間</th>
         <th>メモ</th>
+        <% if current_user.admin? %>
         <th>場所</th>
         <th>編集</th>
         <th>削除</th>
+        <% end %>
       </tr>
     </tbody>
     
@@ -28,6 +30,7 @@
         </td>
         <td><%= plan.note%></td>
         
+        <% if current_user.admin? %>
         <td><% if plan.latitude.present? %>
           <%= link_to(places_user_path(plan),target: :_blank) do %>
         <i class="fa fa-map-marker fa-2x  btn button_map"></i>
@@ -36,15 +39,15 @@
         </td>
         
         <td><%= link_to(edit_plan_path(plan), remote: true) do %>
-        <i class="fa fa-pencil fa-2x btn button_edit"></i>
+        <i class="fa fa-edit fa-2x btn button_edit"></i>
         <% end %>
         </td>
         
         <td><%= link_to(plan, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
-        <i class="fa fa-trash-o fa-2x btn button_delete"></i>
+        <i class="fa fa-trash fa-2x btn button_delete"></i>
         <% end %>
         </td>
-        
+        <% end %>
       </tr>
       <% end %>
       
@@ -54,8 +57,10 @@
         <td></td>
         <td><%= working_times_sum(@total_seconds) unless @total_seconds.nil? %></td>
         <td></td>
+        <% if current_user.admin? %>
         <td></td>
         <td></td>
         <td></td>
+        <% end %>
       </tr>
     </tfoot>

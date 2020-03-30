@@ -1,50 +1,62 @@
-<% provide(:title, '全てのユーザー') %>
 <h1>ユーザー一覧</h1>
-
-<div class="col-md-10 col-md-offset-1">
-  <%= will_paginate %>
-  <table class="table table-condensed table-hover" id="table-users">
-    <thead>
+<%= paginate @users %>
+<div class = "center">
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+    <theader>
       <tr>
-        <th><%= User.human_attribute_name :name %></th>
-        <th class="center"></th>
-        <% if current_user.admin? %>
-        <% end %>
+        <th>名前</th>
+        <th>アクション</th>
+         <th>編集</th>
+          <th>削除</th>
       </tr>
-    </thead>
-
-    <% @users.each do |user| %>
+    </theader>
+    <tbody>
+      <% @users.each do |user| %>
       <tr>
-        <td>
-          <% if current_user.admin? %>
-            <%= link_to user.name, user %>
+      <td><% if current_user.admin? %>
+            <%= link_to user.name, logs_user_path(user) %>
           <% else %>
             <%= user.name %>
           <% end %>
-        </td>
-        
-        <td class="center"></td>
-        <% if current_user.admin? %>
-        <% end %>
-        
-        <td class="center">
-        <% if current_user.admin? && !current_user?(user) %>
-          
-          <%= link_to(edit_basic_info_user_path(user),remote: true) do %>
-           <i class="fa fa-pencil fa-2x btn button_edit"></i>
-          <% end %>
-          <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
-           <i class="fa fa-trash-o fa-2x btn button_delete"></i>
-          <% end %>
-          
-        <% end %>
-        </td>
-        
+      </td>
+      <td><% if user.plans.any?{|plan|
+         (plan.created_at.present? &&
+         plan.finished_at.blank?)} %>
+         <%="実行中.."%>
+         <% end %>
+      </td>
+      <td><%= link_to(edit_basic_info_user_path(user),remote: true) do %>
+           <i class="fa fa-edit fa-2x btn button_edit"></i>
+          <% end %></td>
+      <td><%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
+           <i class="fa fa-trash fa-2x btn button_delete"></i>
+          <% end %></td>
+      <% end %>
       </tr>
-    <% end %>
-  </table>
-  <%= will_paginate %>
+    </tbody>
+</table>
 </div>
 
-<!--モーダルウインドウ表示-->
+<%= paginate @users %>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Microposts</title>
+    <%= csrf_meta_tags %>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- コード追加　Font Awesome読み込みコード-->
+　　 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  </head>
+  
+  <!--モーダルウインドウ表示-->
 <div id="edit-basic-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

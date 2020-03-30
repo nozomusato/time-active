@@ -6,7 +6,7 @@ class PlansController < ApplicationController
       @plan.user_id = current_user.id #user_idの情報はフォームからはきていないので、「ログインしている自分のid」を代入
       if @plan.save
         flash[:success] = '開始しました。'
-        redirect_to start_user_path(current_user)
+        redirect_to logs_user_path(current_user)
       else
         render :new
       end

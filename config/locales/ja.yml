@@ -8,6 +8,13 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
         
   ja:
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left fa-lg page-left"></i>
+      last: <i class="fas fa-angle-double-right fa-lg page-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."
   activerecord:
     models:
       user: ユーザー

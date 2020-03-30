@@ -10,6 +10,7 @@
   </table>
 </div>
 
+<% if current_user?(@user) %>
 <div class="center">
   <div class="row">
     <div class="col-sm-1">
@@ -26,7 +27,8 @@
       <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
   </div>
 </div>
-  
+<% end %>
+
 <% if @plans.present? %>
 <div>
     <thead>
