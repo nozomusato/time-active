@@ -25,6 +25,8 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  
+  config.public_file_server.enabled = true # true に変更
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
