@@ -75,7 +75,6 @@ p {
   clear: both;
   float: left;
   width: 100%;
-  margin-top: 45px;
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
@@ -396,7 +395,7 @@ p {
     background: url(time-active背景３.jpeg);/* 余白指定 */
     background-repeat: no-repeat; /* 繰り返し無し */
     background-size: cover; /* 全体表示 */
-    vertical-align: bottom;
+    display: block;
 }
 
 /* アクション作成ボタン */
