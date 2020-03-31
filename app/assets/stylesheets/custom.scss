@@ -393,10 +393,10 @@ p {
 /* 背景画像 */
 .background-image {                /* 背景部分の指定 */
     padding: 180px; 
-    padding-top: 10px;
     background: url(time-active背景３.jpeg);/* 余白指定 */
     background-repeat: no-repeat; /* 繰り返し無し */
     background-size: cover; /* 全体表示 */
+    vertical-align: bottom;
 }
 
 /* アクション作成ボタン */
@@ -540,4 +540,15 @@ p {
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {        
   border-radius: 15px;    /*角を丸くする*/
+}
+
+.test {
+  font-size: 2.5em;
+  display: inline-block;
+  text-align: center;
+  background: linear-gradient(transparent 70%, #a7d6ff 70%);
+}
+
+.time{
+  color: #696969;
 }

@@ -1,8 +1,8 @@
 <header class="navbar navbar-fixed-top navbar-default navbar-light" style="background-color: #F4A460;">
   <div class="container">
-    <%= link_to "Time-Active", root_path, id: "logo" %>
+    <b><i><%= link_to "Time-Active", root_path, id: "logo" %></i></b>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <b><i><ul class="nav navbar-nav navbar-right">
         <% unless logged_in? %>
         <li><%= link_to "ホーム", root_path %></li>
         <% end %>
@@ -14,7 +14,7 @@
         <% else %>
           <li><%= link_to "ログイン", login_path %></li>
         <% end %>
-      </ul>
+      </ul></i></b>
     </nav>
   </div>
 </header>

@@ -1,7 +1,9 @@
 <div class="container">
-  <h1>アクション作成</h1>
-<h3 class='center'><%=Date.current.strftime("%Y年")%></h3>
-<h3 class='center'><%=Date.current.strftime("%m月%d日")%></h3>
+  <div class="center">
+  <div class = "test">アクション作成</div>
+  </div>
+<h3 class='center time'><%=Date.current.strftime("%Y年")%><%=Date.current.strftime("%m月%d日")%></h3>
+<h3 class='center time' id="RealtimeClockArea2"></h3>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <p><button onclick="getMyPlace()">現在地情報を登録</button></p>

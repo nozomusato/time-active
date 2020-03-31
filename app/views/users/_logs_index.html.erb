@@ -31,7 +31,7 @@
         <td><%= plan.note%></td>
         
         <% if current_user.admin? %>
-        <td><% if plan.latitude.present? %>
+        <td><% if plan.latitude.present? && plan.longitude.present? %>
           <%= link_to(places_user_path(plan),target: :_blank) do %>
         <i class="fa fa-map-marker fa-2x  btn button_map"></i>
         <% end %>
@@ -52,9 +52,9 @@
       <% end %>
       
       <tr>
+        <td>合計数</td>
         <td><%=@plans.count%></td>
-        <td></td>
-        <td></td>
+        <td>累計時間</td>
         <td><%= working_times_sum(@total_seconds) unless @total_seconds.nil? %></td>
         <td></td>
         <% if current_user.admin? %>
