@@ -4,15 +4,11 @@
 /* universal */
 
 body {
-  padding-top: 60px;
-  // background-image: url("c060b618f9a5bd76768ca7e6f3ca0707_t");
+  padding-top: 120px;
   background-image: url("time-active背景３.jpeg");/* 余白指定 */
   background-position:center center;
-  
   background-repeat:no-repeat;
-  
   background-attachment:fixed;
-  
   background-size:cover;
 }
 
@@ -398,14 +394,6 @@ p {
   box-shadow: 0px 15px 20px rgba(128, 128, 128, 0.4);
   transform: translateY(-10px);
 }
-
-/* 背景画像 */
-// .background-image {                /* 背景部分の指定 */
-//     padding: 60px 180px 190px 180px; 
-    
-//     background-repeat: no-repeat; /* 繰り返し無し */
-//     background-size: cover; /* 全体表示 */
-// }
 
 /* アクション作成ボタン */
 .start{
