@@ -392,7 +392,7 @@ p {
 
 /* 背景画像 */
 .background-image {                /* 背景部分の指定 */
-    padding: 180px 180px 250px 180px; 
+    padding: 0px 180px 250px 180px;  /*上 右 下 左*/
     background: url(time-active背景３.jpeg);/* 余白指定 */
     background-repeat: no-repeat; /* 繰り返し無し */
     background-size: cover; /* 全体表示 */
