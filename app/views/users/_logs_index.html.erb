@@ -5,11 +5,11 @@
         <th>終了時間</th>
         <th>合計時間</th>
         <th>メモ</th>
-        <% if current_user.admin? %>
+      <% if current_user.admin? || current_user?(@user)%>
         <th>場所</th>
         <th>編集</th>
         <th>削除</th>
-        <% end %>
+      <% end %>
       </tr>
     </tbody>
     
@@ -30,7 +30,7 @@
         </td>
         <td><%= plan.note%></td>
         
-        <% if current_user.admin? %>
+        <% if current_user.admin? || current_user?(@user)%>
         <td><% if plan.latitude.present? && plan.longitude.present? %>
           <%= link_to(places_user_path(plan),target: :_blank) do %>
         <i class="fa fa-map-marker fa-2x  btn button_map"></i>

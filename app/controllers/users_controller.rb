@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:logs_month]
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:logs_month,:logs_day,:start,:csv_dl]
+  before_action :logged_in_user, only: [:index, :show,:start,:places, :logs, :logs_month, :logs_day,:csv_dl,:edit_action,:edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :correct_user, only: [:show,:start,:places,:logs_month,:logs_day,:edit_action,:destroy,:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
 
   def index
@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   end
   
   def start
-    @user = User.find(params[:id])
     @plan = @user.plans
     @plans = @user.plans.where(finished_at: nil).order(id: "DESC")
   end
@@ -27,7 +26,6 @@ class UsersController < ApplicationController
   end
   
   def logs_month
-    @user = User.find(params[:id])
     @month_first = params[:date].nil? ?
     Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
     @month_last = @month_first.end_of_month.to_time
@@ -35,7 +33,6 @@ class UsersController < ApplicationController
   end
   
   def logs_day
-    @user = User.find(params[:id])
     @today_first = params[:date].nil? ?
     Time.current.beginning_of_day : params[:date].to_time
     @today_last = @today_first.end_of_day.to_time
@@ -43,7 +40,6 @@ class UsersController < ApplicationController
   end
   
   def csv_dl
-    @user = User.find(params[:id])
     @lists = @user.plans
     
     respond_to do |format|

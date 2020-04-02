@@ -37,8 +37,9 @@
         <canvas id="myChart"></canvas>
       </div>
     </thead>
-    
+    <% if current_user?(@user) || current_user.admin? %>
     <%= link_to " CSV出力", csv_dl_path(format: :csv), class: "btn csv fa fa-arrow-circle-o-down fa-lg", method: :post %>
+    <% end %>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <%= render 'logs_index' %>
     

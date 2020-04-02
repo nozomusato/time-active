@@ -1,4 +1,8 @@
 class PlansController < ApplicationController
+  before_action :set_plan, only: [:edit,:update_modal, :update, :destroy]
+  before_action :logged_in_user, only: [:create,:edit,:update_modal,:update,:destroy]
+  before_action :correct_user, only: [:create,:destroy,:update_modal,:update]
+  before_action :admin_user, only: [:destroy,:update_modal]
     
     def create
       @plan = Plan.new(plan_params)
@@ -13,12 +17,10 @@ class PlansController < ApplicationController
     end
     
     def edit
-      @plan = Plan.find(params[:id])
       @user = @plan.user
     end
     
     def update_modal
-      @plan = Plan.find(params[:id])
       if  @plan.update_attributes(time_plan_params)
         flash[:info] = "更新しました。"
       else
@@ -28,7 +30,6 @@ class PlansController < ApplicationController
     end
     
     def update
-      @plan = Plan.find(params[:id])
       if @plan.created_at.present?
         @plan.update_attributes(finished_at: Time.current.change(sec: 0))
         flash[:success] = "終了しました。"
@@ -40,7 +41,6 @@ class PlansController < ApplicationController
     
     
     def destroy
-      @plan = Plan.find(params[:id])
       @plan.destroy
       flash[:success] = "データを削除しました。"
       redirect_to logs_user_path(current_user)
