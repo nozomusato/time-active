@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:edit,:update_modal, :update, :destroy]
   before_action :logged_in_user, only: [:create,:edit,:update_modal,:update,:destroy]
-  before_action :correct_user, only: [:create,:destroy,:update_modal,:update]
+  before_action :correct_user, only: [:destroy,:update_modal,:update]
   before_action :admin_user, only: [:destroy,:update_modal]
     
     def create
