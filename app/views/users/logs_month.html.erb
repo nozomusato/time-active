@@ -54,6 +54,48 @@
 <div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 <!--Chart.js表示-->
+<!--フリー合計時間-->
+<% @frees.each do |free|%>
+     <% if free.finished_at.present? %>
+          <% seconds = (free.finished_at - free.created_at).to_i %>
+          <% @frees_sum = @frees_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
+<!--勉強合計時間-->
+<% @studys.each do |study|%>
+     <% if study.finished_at.present? %>
+      <% seconds = (study.finished_at - study.created_at).to_i %>
+          <% @studys_sum = @studys_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
+<!--運動合計時間-->
+<% @sports.each do |sport|%>
+     <% if sport.finished_at.present? %>
+      <% seconds = (sport.finished_at - sport.created_at).to_i %>
+          <% @sports_sum = @sports_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
+<!--仕事合計時間-->
+<% @jobs.each do |job|%>
+     <% if job.finished_at.present? %>
+      <% seconds = (job.finished_at - job.created_at).to_i %>
+          <% @jobs_sum = @jobs_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
+<!--食事合計時間-->
+<% @meals.each do |meal|%>
+     <% if meal.finished_at.present? %>
+      <% seconds = (meal.finished_at - meal.created_at).to_i %>
+          <% @meals_sum = @meals_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
+<!--睡眠合計時間-->
+<% @sleeps.each do |sleep|%>
+     <% if sleep.finished_at.present? %>
+      <% seconds = (sleep.finished_at - sleep.created_at).to_i %>
+          <% @sleeps_sum = @sleeps_sum.to_i + seconds %>
+     <% end %>
+    <% end %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 <script>
                     var dataLabelPlugin = {
@@ -97,20 +139,21 @@
                     };
                    
                     // Chart
-                    var myChart = "myChart";
-                    var chart = new Chart(myChart, {
+                    var myChart1 = "myChart";
+                    var chart = new Chart(myChart1, {
                         type: 'pie',
                         data: {
                             labels: ["フリー", "勉強", "運動", "仕事", "食事", "睡眠"],
                             datasets: [{
                                 label: "Sample",
                                 backgroundColor: ["#5D99FF", "#FA8072", "#FFD700", "#9ACD32", "#9370DB", "#F4A460"],
-                                data: [<%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['フリー']).count}"%>,
-                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['勉強']).count}"%>,
-                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['運動']).count}"%>,
-                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['仕事']).count}"%>,
-                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['食事']).count}"%>,
-                                <%= "#{@user.plans.where(created_at: @month_first..@month_last,menu: ['睡眠']).count}"%>],
+                                data: [
+                                <%= working_times_sum(@frees_sum) %>,
+                                <%= working_times_sum(@studys_sum) %>,
+                                <%= working_times_sum(@sports_sum) %>,
+                                <%= working_times_sum(@jobs_sum) %>,
+                                <%= working_times_sum(@meals_sum) %>,
+                                <%= working_times_sum(@sleeps_sum) %>],
                             }]
                         },
                         options: {

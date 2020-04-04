@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:logs_month,:logs_day,:start,:csv_dl]
   before_action :logged_in_user, only: [:index, :show,:start,:places, :logs, :logs_month, :logs_day,:csv_dl,:edit_action,:edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  before_action :correct_user, only: [:show,:start,:places,:logs_month,:logs_day,:edit_action,:destroy,:edit, :update]
+  before_action :correct_user, only: [:show,:start,:logs_month,:logs_day,:edit_action,:destroy,:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
 
   def index
@@ -23,6 +23,18 @@ class UsersController < ApplicationController
   def logs
     @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
     @plans = @user.plans.order(created_at: "DESC")
+    @frees = @user.plans.where(menu: ['フリー'])
+    @frees_sum = 0
+    @studys = @user.plans.where(menu: ['勉強'])
+    @studys_sum =0
+    @sports = @user.plans.where(menu: ['運動'])
+    @sports_sum =0
+    @jobs = @user.plans.where(menu: ['仕事'])
+    @jobs_sum =0
+    @meals = @user.plans.where(menu: ['食事'])
+    @meals_sum =0
+    @sleeps = @user.plans.where(menu: ['睡眠'])
+    @sleeps_sum =0
   end
   
   def logs_month
@@ -30,6 +42,18 @@ class UsersController < ApplicationController
     Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
     @month_last = @month_first.end_of_month.to_time
     @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC")
+    @frees = @user.plans.where(created_at: @month_first..@month_last,menu: ['フリー'])
+    @frees_sum = 0
+    @studys = @user.plans.where(created_at: @month_first..@month_last,menu: ['勉強'])
+    @studys_sum =0
+    @sports = @user.plans.where(created_at: @month_first..@month_last,menu: ['運動'])
+    @sports_sum =0
+    @jobs = @user.plans.where(created_at: @month_first..@month_last,menu: ['仕事'])
+    @jobs_sum =0
+    @meals = @user.plans.where(created_at: @month_first..@month_last,menu: ['食事'])
+    @meals_sum =0
+    @sleeps = @user.plans.where(created_at: @month_first..@month_last,menu: ['睡眠'])
+    @sleeps_sum =0
   end
   
   def logs_day
@@ -37,10 +61,22 @@ class UsersController < ApplicationController
     Time.current.beginning_of_day : params[:date].to_time
     @today_last = @today_first.end_of_day.to_time
     @plans = @user.plans.where(created_at: @today_first..@today_last).order(id: "DESC")
+    @frees = @user.plans.where(created_at: @today_first..@today_last,menu: ['フリー'])
+    @frees_sum = 0
+    @studys = @user.plans.where(created_at: @today_first..@today_last,menu: ['勉強'])
+    @studys_sum =0
+    @sports = @user.plans.where(created_at: @today_first..@today_last,menu: ['運動'])
+    @sports_sum =0
+    @jobs = @user.plans.where(created_at: @today_first..@today_last,menu: ['仕事'])
+    @jobs_sum =0
+    @meals = @user.plans.where(created_at: @today_first..@today_last,menu: ['食事'])
+    @meals_sum =0
+    @sleeps = @user.plans.where(created_at: @today_first..@today_last,menu: ['睡眠'])
+    @sleeps_sum =0
   end
   
   def csv_dl
-    @lists = @user.plans
+    @lists = @user.plans.order(created_at: "DESC")
     
     respond_to do |format|
       # format.html do

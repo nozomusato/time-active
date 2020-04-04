@@ -14,9 +14,8 @@
         <%= f.select :menu,{"フリー" => "フリー","勉強" => "勉強","運動" => "運動", "仕事" => "仕事", "食事" => "食事", "睡眠" => "睡眠"},{}, class: "form-control" %>
         <%= f.label :メモ, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :note, class: "form-control" %>
-        <%= f.label :緯度, class:"label-#{yield(:class_text)}" %>
+        <%= f.label :現在地情報, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :latitude,readonly: true, id: "result1", class: "form-control" %>
-        <%= f.label :経度, class:"label-#{yield(:class_text)}" %>
         <%= f.text_field :longitude,readonly: true, id: "result2",class: "form-control" %>
     </tbody>
     <div class = "center">
@@ -47,8 +46,7 @@
         <tr>
             <td><%= plan.menu %></td>
             <td><%= plan.created_at.strftime("%Y年%m月%d日 %H:%M")%></td>
-            <% total = Time.current - plan.created_at%>
-              <td><%= Time.at(total).strftime("%H:%M")%></td>
+              <td><%= working_times(plan.created_at, Time.current) %></td>
              <td><%= plan.note%></td>
              <td><% unless plan.finished_at.present? %>
                   <%= link_to(update_plan_path(plan), method: :patch) do %>

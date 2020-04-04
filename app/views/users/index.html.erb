@@ -7,9 +7,8 @@
     <theader>
       <tr>
         <th>名前</th>
-        <th>アクション状況</th>
+        <th>現在状況</th>
         <% if current_user.admin? %>
-         <th>編集</th>
           <th>削除</th>
           <% end %>
       </tr>
@@ -29,16 +28,15 @@
          <%="実行中.."%>
          <% end %>
       </td>
+      <td>
       <% if current_user.admin? %>
-      <td><%= link_to(edit_basic_info_user_path(user),remote: true) do %>
-           <i class="fa fa-edit fa-2x btn button_edit"></i>
-          <% end %></td>
        <% unless user.admin %>
-      <td><%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do%>
-           <i class="fa fa-trash fa-2x btn button_delete"></i>
-          <% end %></td>
+      <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do %>
+      <i class="fa fa-trash fa-2x btn button_delete"></i>
+      <% end %>
        <% end %><!--unless user.admin-->
       <% end %><!--current_user.admin?-->
+      </td>
       <% end %><!--@users.each-->
       </tr>
     </tbody>
