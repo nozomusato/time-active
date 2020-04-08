@@ -437,6 +437,7 @@ p {
 }
 
 .csv{
+  margin-right: 10px;
   color: #FFF;
   background-color: #F4A460;
   transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
@@ -547,4 +548,20 @@ p {
 
 .time{
   color: #696969;
+}
+
+.search-btn{
+  color: #FFF;
+  background-color: #F4A460;
+  margin-left: 5px;
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+}
+
+.search-btn:hover{
+  color: #FFF;
+  transform: translateY(-7px);
+}
+
+.search-form {
+  width: 180px;
 }

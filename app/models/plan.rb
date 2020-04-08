@@ -19,4 +19,12 @@ class Plan < ApplicationRecord
       errors.add(:created_at, "より早い終了時間は無効です") if created_at > finished_at
     end
   end
+  
+  def self.search(search) #self.でクラスメソッドとしている
+    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
+      Plan.where(['menu LIKE ?', "%#{search}%"])
+    else
+      Plan.all #全て表示。
+    end
+  end
 end

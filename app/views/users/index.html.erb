@@ -2,6 +2,10 @@
 <div class = "test">ユーザー一覧</div>
 </div>
 <%= paginate @users %>
+<%= form_with(scope: :search, url: users_path, method: :get, local: true) do |f| %>
+  <%= text_field_tag :search,"",{class: "search-form"}%>
+  <%= submit_tag '検索', :name => nil, class: "btn search-btn"%>
+<% end %>
 <div class = "center">
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <theader>

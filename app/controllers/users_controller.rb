@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
 
   def index
-    @users = User.all.page(params[:page])
+    @users = User.all.page(params[:page]).search(params[:search])
   end
 
   def show
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   
   def logs
     @menu_sum = @user.plans.where.not(created_at: nil).count #存在しているplanの数
-    @plans = @user.plans.order(created_at: "DESC")
+    @plans = @user.plans.order(created_at: "DESC").search(params[:search])
     @frees = @user.plans.where(menu: ['フリー'])
     @frees_sum = 0
     @studys = @user.plans.where(menu: ['勉強'])
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @month_first = params[:date].nil? ?
     Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
     @month_last = @month_first.end_of_month.to_time
-    @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC")
+    @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC").search(params[:search])
     @frees = @user.plans.where(created_at: @month_first..@month_last,menu: ['フリー'])
     @frees_sum = 0
     @studys = @user.plans.where(created_at: @month_first..@month_last,menu: ['勉強'])
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     @today_first = params[:date].nil? ?
     Time.current.beginning_of_day : params[:date].to_time
     @today_last = @today_first.end_of_day.to_time
-    @plans = @user.plans.where(created_at: @today_first..@today_last).order(id: "DESC")
+    @plans = @user.plans.where(created_at: @today_first..@today_last).order(id: "DESC").search(params[:search])
     @frees = @user.plans.where(created_at: @today_first..@today_last,menu: ['フリー'])
     @frees_sum = 0
     @studys = @user.plans.where(created_at: @today_first..@today_last,menu: ['勉強'])

@@ -43,7 +43,15 @@
         <canvas id="myChart"></canvas>
       </div>
     </thead>
-
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+      <% if current_user?(@user) || current_user.admin? %>
+    <%= link_to " CSV出力", csv_dl_path(format: :csv), class: "btn csv fa fa-arrow-circle-o-down fa-lg", method: :post %>
+    <% end %>
+    <%= form_with(scope: :search, url: logs_day_user_path, method: :get, local: true) do |f| %>
+  <%= select_tag :search, options_for_select([["",""],["フリー","フリー"], ["勉強","勉強"], ["運動","運動"], ["仕事","仕事"], ["食事","食事"], ["睡眠","睡眠"]],:selected=>"6"),
+  { autofocus: 'true', class: 'search-form'} %>
+  <%= submit_tag '検索', :menu => nil, class: "btn search-btn"%>
+<% end %>
     <%= render 'logs_index' %>
     
   </table>
