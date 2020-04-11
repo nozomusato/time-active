@@ -5,7 +5,11 @@
       <td>名前：<%= @user.name %></td>
     </tr>
     <tr>
-      <td>履歴数：<%= @plans.count %></td>
+      <% if @user.plans.any?{|plan|
+         (plan.created_at.present? &&
+         plan.finished_at.blank?)} %>
+         <td>アクション：<%="実行中.."%></td>
+         <% end %>
     </tr>
   </table>
 </div>
@@ -25,6 +29,8 @@
       <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
   </div><!--center-->
 </div><!--center-->
+
+<% if @plans.present? %>
 <div class="center">
   <%= link_to(logs_month_user_path(date: @month_first.prev_month)) do %>
     <i class="fa fa-arrow-left fa-lg page-left" %></i><% end %>
@@ -34,7 +40,6 @@
     <% end %>
 </div>
 
-<% if @plans.present? %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
@@ -44,9 +49,6 @@
       </div>
     </thead>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
-      <% if current_user?(@user) || current_user.admin? %>
-    <%= link_to " CSV出力", csv_dl_path(format: :csv), class: "btn csv fa fa-arrow-circle-o-down fa-lg", method: :post %>
-    <% end %>
     <%= form_with(scope: :search, url: logs_month_user_path, method: :get, local: true) do |f| %>
   <%= select_tag :search, options_for_select([["",""],["フリー","フリー"], ["勉強","勉強"], ["運動","運動"], ["仕事","仕事"], ["食事","食事"], ["睡眠","睡眠"]],:selected=>"6"),
   { autofocus: 'true', class: 'search-form'} %>

@@ -5,7 +5,11 @@
       <td>名前：<%= @user.name %></td>
     </tr>
     <tr>
-      <td>履歴数：<%= @plans.count %></td>
+      <% if @user.plans.any?{|plan|
+         (plan.created_at.present? &&
+         plan.finished_at.blank?)} %>
+         <td>アクション：<%="実行中.."%></td>
+         <% end %>
     </tr>
   </table>
 </div>

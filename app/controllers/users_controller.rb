@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = '新規作成に成功しました。'
-      redirect_to start_user_path(@user)
+      redirect_to @user
     else
       render :new
     end
@@ -124,18 +124,6 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:success] = "#{@user.name}のデータを削除しました。"
-    redirect_to users_url
-  end
-
-  def edit_basic_info
-  end
-
-  def update_basic_info
-    if @user.update_attributes(basic_info_params)
-      flash[:success] = "#{@user.name}の基本情報を更新しました。"
-    else
-      flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
-    end
     redirect_to users_url
   end
 
