@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info,:logs,:logs_month,:logs_day,:start,:csv_dl]
-  before_action :logged_in_user, only: [:index, :show,:start,:places, :logs, :logs_month, :logs_day,:csv_dl,:edit_action,:edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  before_action :correct_user, only: [:show,:start,:logs_month,:logs_day,:edit_action,:destroy,:edit, :update]
-  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_user, only: [:show, :edit, :update, :destroy,:logs,:logs_month,:logs_day,:start,:csv_dl]
+  before_action :logged_in_user, only: [:index, :show,:start,:places, :logs, :logs_month, :logs_day,:csv_dl,:edit_action,:edit, :update]
+  before_action :correct_user, only: [:show,:start,:logs_month,:logs_day,:edit_action,:edit, :update]
+  before_action :admin_user, only: [:destroy]
 
   def index
     @users = User.all.page(params[:page]).search(params[:search])
