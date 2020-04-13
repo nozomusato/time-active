@@ -30,7 +30,6 @@
   </div><!--center-->
 </div><!--center-->
 
-<% if @plans.present? %>
 <div class="center">
   <%= link_to(logs_month_user_path(date: @month_first.prev_month)) do %>
     <i class="fa fa-arrow-left fa-lg page-left" %></i><% end %>
@@ -40,6 +39,7 @@
     <% end %>
 </div>
 
+<% if @plans.present? %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>

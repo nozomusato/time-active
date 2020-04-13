@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 20200219034105) do
     t.string "menu"
     t.datetime "finished_at"
     t.string "note"
-    t.float "latitude"
-    t.float "longitude"
+    t.string "prefectures"
+    t.string "city"
+    t.string "town"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

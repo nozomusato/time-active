@@ -29,7 +29,6 @@
       <%= link_to "アクション作成", start_user_path(current_user), class: "btn start" %>
   </div><!--center-->
   
-  <% if @plans.present? %>
 </div><!--center-->
 <div class="center">
   <%= link_to(logs_day_user_path(date: @today_first.prev_day)) do %>
@@ -40,6 +39,7 @@
     <% end %>
 </div>
 
+<% if @plans.present? %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>

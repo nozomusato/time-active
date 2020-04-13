@@ -13,9 +13,9 @@
       <tr>
         <th>名前</th>
         <th>現在状況</th>
-        <% if current_user.admin? %>
-          <th>削除</th>
-          <% end %>
+        <th><% if current_user.admin? %>
+          削除
+          <% end %></th>
       </tr>
     </theader>
     <tbody>

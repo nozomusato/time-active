@@ -47,7 +47,7 @@ class PlansController < ApplicationController
     private
 
     def plan_params
-      params.require(:plan).permit(:menu,:note,:latitude,:longitude)
+      params.require(:plan).permit(:menu,:note,:prefectures,:city,:town)
     end
     
     def time_plan_params

@@ -4,9 +4,9 @@ class CreatePlans < ActiveRecord::Migration[5.1]
       t.string :menu
       t.datetime :finished_at
       t.string :note
-      t.float :latitude #緯度
-      t.float :longitude #経度
-      
+      t.string :prefectures
+      t.string :city
+      t.string :town
       t.references :user, foreign_key: true
 
       t.timestamps
