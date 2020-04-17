@@ -3,6 +3,7 @@ class Plan < ApplicationRecord
     
     validates :menu, presence: true
     validates :created_at, presence: true
+    validates :note, length: { maximum: 50 }
     
     # 出勤時間が存在しない場合、退勤時間は無効
   validate :finished_at_is_invalid_without_a_created_at
