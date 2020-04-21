@@ -130,7 +130,7 @@ Plan.create!(menu:"運動",
             user_id: 3)
              
 
-60.times do |n|
+63.times do |n|
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
   password = "password"
