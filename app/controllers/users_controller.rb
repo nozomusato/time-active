@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @month_first = params[:date].nil? ?
     Time.current.beginning_of_month : params[:date].to_time #○/1だけ非表示になるためTimeクラス
     @month_last = @month_first.end_of_month.to_time
-    @plans = @user.plans.where(created_at: @month_first..@month_last).order(id: "DESC").search(params[:search])
+    @plans = @user.plans.where(created_at: @month_first..@month_last).order(created_at: "DESC").search(params[:search])
     @frees = @user.plans.where(created_at: @month_first..@month_last,menu: ['フリー'])
     @frees_sum = 0
     @studys = @user.plans.where(created_at: @month_first..@month_last,menu: ['勉強'])
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     @today_first = params[:date].nil? ?
     Time.current.beginning_of_day : params[:date].to_time
     @today_last = @today_first.end_of_day.to_time
-    @plans = @user.plans.where(created_at: @today_first..@today_last).order(id: "DESC").search(params[:search])
+    @plans = @user.plans.where(created_at: @today_first..@today_last).order(created_at: "DESC").search(params[:search])
     @frees = @user.plans.where(created_at: @today_first..@today_last,menu: ['フリー'])
     @frees_sum = 0
     @studys = @user.plans.where(created_at: @today_first..@today_last,menu: ['勉強'])

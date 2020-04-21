@@ -13,9 +13,9 @@
       <tr>
         <th>名前</th>
         <th>現在状況</th>
-        <th><% if current_user.admin? %>
-          削除
-          <% end %></th>
+        <% if current_user.admin? %>
+          <th>削除</th>
+          <% end %>
       </tr>
     </theader>
     <tbody>
@@ -33,15 +33,17 @@
          <%="実行中.."%>
          <% end %>
       </td>
-      <td>
       <% if current_user.admin? %>
+      <td>
+      
        <% unless user.admin %>
       <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do %>
       <i class="fa fa-trash fa-2x btn button_delete"></i>
       <% end %>
        <% end %><!--unless user.admin-->
-      <% end %><!--current_user.admin?-->
+      
       </td>
+      <% end %><!--current_user.admin?-->
       <% end %><!--@users.each-->
       </tr>
     </tbody>
