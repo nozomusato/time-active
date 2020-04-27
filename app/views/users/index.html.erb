@@ -13,37 +13,26 @@
       <tr>
         <th>名前</th>
         <th>現在状況</th>
-        <% if current_user.admin? %>
           <th>削除</th>
-          <% end %>
       </tr>
     </theader>
     <tbody>
       <% @users.each do |user| %>
       <tr>
-      <td><% if current_user.admin? %>
-            <%= link_to user.name, logs_user_path(user) %>
-          <% else %>
-            <%= user.name %>
-          <% end %>
-      </td>
+      <td><%= link_to user.name, logs_user_path(user) %></td>
       <td><% if user.plans.any?{|plan|
          (plan.created_at.present? &&
          plan.finished_at.blank?)} %>
          <%="実行中.."%>
          <% end %>
       </td>
-      <% if current_user.admin? %>
       <td>
-      
-       <% unless user.admin %>
-      <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do %>
-      <i class="fa fa-trash fa-2x btn button_delete"></i>
-      <% end %>
+        <% unless user.admin %>
+         <%= link_to(user, method: :delete,data: { confirm: "削除してよろしいですか？" }) do %>
+         <i class="fa fa-trash fa-2x btn button_delete"></i>
+        <% end %>
        <% end %><!--unless user.admin-->
-      
       </td>
-      <% end %><!--current_user.admin?-->
       <% end %><!--@users.each-->
       </tr>
     </tbody>

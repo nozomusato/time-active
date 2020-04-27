@@ -18,29 +18,32 @@
     </div>
     </div>
     
+    <% if current_user.admin %>
+    
     <div class="row">
-    <div class="col-md-6">
-      <%= link_to (users_path) do %>
-        <i class="fa fa-users fa-4x btn user-index"></i>
-        <p>ユーザー一覧</p>
-        <% end %>
-    </div>
-  
-    <div class="col-md-6">
+      <div class="col-md-6">
        <%= link_to (start_user_path(current_user)) do %>
         <i class="fa fa-clock-o fa-5x btn user-start"></i>
         <p>アクション作成</p>
         <% end %>
     </div>
-    </div>
     
-    <div class="row">
     <div class="col-md-6">
       <%= link_to (logs_user_path(current_user)) do %>
         <i class="fa fa-pie-chart fa-5x btn user-logs"></i>
         <p>集計</p>
         <% end %>
     </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+      <%= link_to (users_path) do %>
+        <i class="fa fa-users fa-4x btn user-index"></i>
+        <p>ユーザー一覧</p>
+        <% end %>
+    </div>
+    
     <div class="col-md-6">
       <%= link_to logout_path, method: :delete do %>
         <i class="fa fa-power-off fa-5x btn logout"></i>
@@ -49,4 +52,31 @@
     </div>
     </div>
     
+    <% else %>
+    
+    <div class="row">
+      <div class="col-md-6">
+       <%= link_to (start_user_path(current_user)) do %>
+        <i class="fa fa-clock-o fa-5x btn user-start"></i>
+        <p>アクション作成</p>
+        <% end %>
+    </div>
+    
+    <div class="col-md-6">
+      <%= link_to (logs_user_path(current_user)) do %>
+        <i class="fa fa-pie-chart fa-5x btn user-logs"></i>
+        <p>集計</p>
+        <% end %>
+    </div>
+    </div>
+    
+    <div class="col">
+      <%= link_to logout_path, method: :delete do %>
+        <i class="fa fa-power-off fa-5x btn logout"></i>
+        <p>ログアウト</p>
+        <% end %>
+    </div>
+   </div><!--class="row"-->
+   
+  <% end %>
 </div>
